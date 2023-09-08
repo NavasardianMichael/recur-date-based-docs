@@ -1,0 +1,8 @@
+:root {
+    --primary-color: #40444f;
+    --secondary-color: #6c757d86;
+}
+
+.app {
+    padding: 1rem;
+}

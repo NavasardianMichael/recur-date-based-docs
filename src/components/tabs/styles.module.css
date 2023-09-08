@@ -1,0 +1,25 @@
+.tabs {
+    display: flex;
+    margin-top: 2rem;
+    border-bottom: 1px solid var(--secondary-color);
+
+    & > .trigger {
+        all: unset;
+        cursor: pointer;
+        border-width: 1px;
+        border-style: solid;
+        border-color: white;
+        border-top-left-radius: 4px;
+        border-top-right-radius: 4px;
+        border-bottom: none;
+        transition: .2s;
+        padding: .5rem 1rem;
+        text-align: center;
+
+        &:hover,
+        &:focus,
+        &:focus-within {
+            border-color: var(--secondary-color);
+        }
+    }
+}
