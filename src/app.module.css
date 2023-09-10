@@ -1,8 +1,30 @@
 :root {
     --primary-color: #40444f;
-    --secondary-color: #6c757d86;
+    --secondary-color: #6c757d4f;
+    --tertiary-color: #2b79c3;
+}
+
+::-moz-selection {
+    color: #fff;
+    background: var(--tertiary-color);
+}
+
+::selection {
+    color: #fff;
+    background: var(--tertiary-color);
 }
 
 .app {
-    padding: 1rem;
+    padding: 1rem 2rem;
+
+    & code {
+        padding: .25rem .5rem;
+        border-radius: 4px;
+        background-color: rgba(34,34,34,.03);
+        border: 1px solid rgba(34,34,34,.2);
+    }
+
+    & a {
+        color: var(--primary-color);
+    }
 }

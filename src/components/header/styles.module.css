@@ -5,6 +5,7 @@
 
     .logo {
         width: 100px;
+        transform: translateX(-.6rem);
         
         & > img {
             width: 100%;

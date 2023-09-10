@@ -1,0 +1,55 @@
+.docs {
+    .installBlock {
+        display: flex;
+        width: fit-content;
+        align-items: center;
+        gap: .5rem;
+        background-color: rgba(34,34,34,.03);
+        border: 1px solid rgba(34,34,34,.2);
+        padding: .5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        user-select: none;
+
+        &.disabled {
+            opacity: .5;
+            cursor: no-drop;
+        }
+
+        & > img {
+            width: 20px;
+            transition: .2s;
+            opacity: .3;
+        }
+
+        &:hover {
+            & > img {
+                opacity: .6;
+            }
+        }
+    }
+
+    .paramsTable {
+        text-align-last: left;
+        border-collapse: separate;
+        font-size: .8rem;
+        
+        & th,
+        & td {
+            border: 1px solid rgba(211, 211, 211, 0.6);
+            padding: .5rem;
+            word-wrap: break-word;
+            overflow-wrap: break-word; 
+        }
+
+        & tr > th:nth-of-type(2) {
+            width: 505px;
+        }
+    }
+
+    .demoCode {
+        font-size: .8rem;
+        display: block;
+        padding: 1rem;
+    }
+}
