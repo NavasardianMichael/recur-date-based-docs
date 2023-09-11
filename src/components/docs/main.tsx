@@ -1,8 +1,7 @@
 import { FC, memo, useEffect, useRef, useState } from 'react'
-import CopyIcon from 'assets/images/copy-icon.svg'
-import CheckMarkIcon from 'assets/images/check-mark.svg'
 import styles from './styles.module.css'
 import { combineClassNames } from 'helpers/commons'
+import { Copyable } from 'components/copyable/main'
 
 type Props = {
 
@@ -48,10 +47,9 @@ export const Docs: FC<Props> = memo(({  }) => {
     <p>There are some recurring date utilities, such as <a target="_blank" href="https://www.npmjs.com/package/recurring-date">recurring-date</a> and <a target="_blank" href="https://www.npmjs.com/package/moment-recur">moment-recur</a> available on NPM. But the first is className based and for second the <a target="_blank" href="https://www.npmjs.com/package/moment">moment</a> is a must. So I didn't find any package that really suited my needs, when I ran into the problem of providing such functionality․ Eventually I created this enhanced one, which is function based, suitable for TypeScript, and does not need additional mapping for extra properties.</p>
     <p>If you have some idea about the next features of the current package, please suggest changes by forking this repo and creating a pull request or opening an issue.</p>
     <h2 id="getting-started">Getting Started</h2>
-    <div className={combineClassNames(styles.installBlock, copied ? styles.disabled : '')} onClick={handleCopy}>
-      {<img className={styles.copyIcon} src={copied ? CheckMarkIcon : CopyIcon} />}
-      npm install recur-date-based
-    </div>
+    <Copyable>
+      <div style={{padding: '1rem'}}>npm install recur-date-based</div>
+    </Copyable>
     <p>Here are presented all the available parameters the exported function accepts.</p>
     <table className={styles.paramsTable}>
     <thead>
@@ -65,7 +63,7 @@ export const Docs: FC<Props> = memo(({  }) => {
     <tbody>
     <tr>
     <td>start</td>
-    <td><code>string</code> or <code>Date</code></td>
+    <td><code>string | Date</code></td>
     <td>The start date or its any string representation.</td>
     <td>today</td>
     </tr>
@@ -154,12 +152,12 @@ export const Docs: FC<Props> = memo(({  }) => {
     </table>
     <h2 id="usage">Usage</h2>
     <p>Check out an example.</p>    
-    <pre>
-      <code className={styles.demoCode}>
-        import genRecurDateBasedList from 'recur-date-based'
-        <br/>
+<Copyable>
+<pre>
+  <code className={styles.demoCode}>        
 {
-  `
+`import genRecurDateBasedList from 'recur-date-based'
+
 genRecurDateBasedList({
   start: '2022-01-01T00:00:00',
   end: '2022-01-15T00:00:00',
@@ -174,17 +172,19 @@ genRecurDateBasedList({
   // filtering only upcoming dates
   exclude: ({date, dateStr}) => date < new Date(),
   extend: {
-    isMonday: ({date, dateStr}) => date.getDay() === '1',
+    isMonday: ({date, dateStr}) => date.getDay() === 1,
   }
 })`
 }
-      </code>
-    </pre>
+  </code>
+</pre>
+</Copyable>
 
 <p>
 The result is an array consisting of objects. The latters always include <code>dateStr</code> property and extended ones optionally. Check out the result.
 </p>
 
+<Copyable>
 <pre>
   <code className={styles.demoCode}>
 {
@@ -198,18 +198,19 @@ The result is an array consisting of objects. The latters always include <code>d
 }
   </code>
 </pre>
+</Copyable>
 
 <p>
 Check out another example with <code>direction</code> set to <code>'backwards'</code> and with applied custom <code>numericTimezone</code> . The example was compiled in the time zone GMT+4.
 </p>
 
 
+<Copyable>
 <pre>
-      <code className={styles.demoCode}>
-        import genRecurDateBasedList from 'recur-date-based'
-        <br/>
+  <code className={styles.demoCode}>    
 {
-  `
+`import genRecurDateBasedList from 'recur-date-based'
+
 genRecurDateBasedList({
   start: '2023-09-06T16:30:00',
   end: 5,
@@ -226,15 +227,16 @@ genRecurDateBasedList({
   }
 })`
 }
-      </code>
-    </pre>
-
+  </code>
+</pre>
+</Copyable>
 
 <p>
 Check out the result. Pay attention to the the `dateStr` format. In case of missing `localeString` property, the date will be formatted to <b>yyyy-mm-ddThh:mm:ss</b> .
 </p>
 
 
+<Copyable>
 <pre>
   <code className={styles.demoCode}>
 {
@@ -248,7 +250,7 @@ Check out the result. Pay attention to the the `dateStr` format. In case of miss
 }
   </code>
 </pre>
-
+</Copyable>
     <h2 id="roadmap">Roadmap</h2>
     <div> &#10003; Finalize the initial version</div>
     <div> &#10003; Add extended props callbacks</div>
@@ -266,7 +268,7 @@ Check out the result. Pay attention to the the `dateStr` format. In case of miss
     <ol>
     <li>Fork the Project</li>
     <li>Create your Feature Branch - <code>git checkout -b feature/short-description</code></li>
-    <li>Commit your Changes - <code>git commit -m 'Provided some Amazing feature'</code></li>
+    <li>Commit your Changes - <code>git commit -m 'Provided some amazing feature'</code></li>
     <li>Push to the Branch - <code>git push origin feature/short-description</code></li>
     <li>Open a Pull Request</li>
     </ol>

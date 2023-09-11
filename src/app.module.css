@@ -21,10 +21,17 @@
         padding: .25rem .5rem;
         border-radius: 4px;
         background-color: rgba(34,34,34,.03);
-        border: 1px solid rgba(34,34,34,.2);
     }
 
     & a {
         color: var(--primary-color);
+    }
+
+    & h2 {
+        margin-top: 3rem;
+    }
+
+    & pre {
+        margin: 0;
     }
 }

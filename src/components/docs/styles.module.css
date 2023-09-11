@@ -1,34 +1,4 @@
 .docs {
-    .installBlock {
-        display: flex;
-        width: fit-content;
-        align-items: center;
-        gap: .5rem;
-        background-color: rgba(34,34,34,.03);
-        border: 1px solid rgba(34,34,34,.2);
-        padding: .5rem 1rem;
-        border-radius: 6px;
-        cursor: pointer;
-        user-select: none;
-
-        &.disabled {
-            opacity: .5;
-            cursor: no-drop;
-        }
-
-        & > img {
-            width: 20px;
-            transition: .2s;
-            opacity: .3;
-        }
-
-        &:hover {
-            & > img {
-                opacity: .6;
-            }
-        }
-    }
-
     .paramsTable {
         text-align-last: left;
         border-collapse: separate;
@@ -47,9 +17,7 @@
         }
     }
 
-    .demoCode {
-        font-size: .8rem;
-        display: block;
-        padding: 1rem;
+    & code:not(.demoCode) {
+        border: 1px solid var(--secondary-color);
     }
 }
