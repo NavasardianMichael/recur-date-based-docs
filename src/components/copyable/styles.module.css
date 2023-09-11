@@ -8,7 +8,6 @@
     transition: .3s;
 
     .installBlock {
-        border-radius: 6px;
         cursor: pointer;
         user-select: none;
         box-sizing: border-box;
