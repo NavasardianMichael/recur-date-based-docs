@@ -1,8 +1,15 @@
 .docs {
+    margin-top: 2rem;
+
     .paramsTable {
         text-align-last: left;
         border-collapse: separate;
         font-size: .8rem;
+
+        & code:not(.demoCode) {
+            display: inline-block;
+            width: fit-content;
+        }
         
         & th,
         & td {

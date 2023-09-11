@@ -1,12 +1,12 @@
 import { Header } from './components/header/main';
+import { Docs } from 'components/docs/main';
 import styles from './app.module.css'
-import { Tabs } from 'components/tabs/main';
 
 function App() {
   return (
     <div className={styles.app}>
       <Header />
-      <Tabs />
+      <Docs />
     </div>
   );
 }

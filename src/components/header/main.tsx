@@ -6,7 +6,7 @@ type Props = {
 
 }
 
-export const Header: FC<Props> = ({  }) => {
+export const Header: FC<Props> = () => {
   return (
     <div className={styles.header}>
         <div className={styles.logo}>

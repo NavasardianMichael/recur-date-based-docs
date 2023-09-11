@@ -4,7 +4,7 @@
     gap: 1rem;
 
     .logo {
-        width: 100px;
+        width: 80px;
         transform: translateX(-.6rem);
         
         & > img {

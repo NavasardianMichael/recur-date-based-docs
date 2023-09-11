@@ -5,20 +5,15 @@ import CopyIcon from 'assets/images/copy-icon.svg'
 import CheckMarkIcon from 'assets/images/check-mark.svg'
 import styles from './styles.module.css'
 
-type Props = {
-
-}
-
-export const Copyable: FC<PropsWithOptionalChildren<Props>> = ({ children }) => {
+export const Copyable: FC<PropsWithOptionalChildren> = ({ children }) => {
 
     const [copied, setCopied] = useState(false)
     const copiedTimeout = useRef<NodeJS.Timeout>()
     const contentRef = useRef<HTMLDivElement>(null)
   
     const handleCopy = () => {
-      navigator.clipboard.writeText('npm install recur-date-based')
+      navigator.clipboard.writeText(contentRef?.current?.textContent as string)
       setCopied(true)
-  console.log(contentRef.current?.textContent);
   
       copiedTimeout.current = setTimeout(() => setCopied(false), 2000)
     }
@@ -31,7 +26,11 @@ export const Copyable: FC<PropsWithOptionalChildren<Props>> = ({ children }) => 
     return (
         <div className={styles.copyable}>
             <div className={combineClassNames(styles.installBlock, copied ? styles.disabled : '')} onClick={handleCopy}>
-                <img className={styles.copyIcon} src={copied ? CheckMarkIcon : CopyIcon} />
+                <img 
+                    className={styles.copyIcon} 
+                    src={copied ? CheckMarkIcon : CopyIcon} 
+                    alt='copy icon'
+                />
                 <div ref={contentRef}>{children}</div>
             </div>
         </div>
