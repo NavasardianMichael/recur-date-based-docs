@@ -261,7 +261,7 @@ Check out the result. Pay attention to the the `dateStr` format. In case of miss
     <h2 id="contact">Contact</h2>
     <p>Email - <a target="_blank" rel="noreferrer" href='mailto:navasardianmichael@gmail.com'>navasardianmichael@gmail.com</a></p>
     <p>LinkedIn - <a target="_blank" rel="noreferrer" href='https://linkedin.com/in/michael-navasardyan'>https://linkedin.com/in/michael-navasardyan</a></p>
-    <p>Project: <a href="https://github.com/NavasardianMichael/recur-date-based">https://github.com/NavasardianMichael/recur-date-based</a></p>
+    <p>Project - <a href="https://github.com/NavasardianMichael/recur-date-based">https://github.com/NavasardianMichael/recur-date-based</a></p>
     </div>
   )
 })
