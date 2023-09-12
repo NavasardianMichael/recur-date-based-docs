@@ -54,7 +54,7 @@ export const Docs: FC<Props> = memo(() => {
     </tr>
     <tr>
     <td>end</td>
-    <td><code>number | string</code></td>
+    <td><code>number | string | Date</code></td>
     <td>Number of occurrences or the start date or any string representation of it. The number larger than 99999 will is not applicable (will cause an error).</td>
     <td><code>100</code></td>
     </tr>
@@ -68,13 +68,13 @@ export const Docs: FC<Props> = memo(() => {
     <td>intervalType</td>
     <td>
         <code>
-        'millisecond' | 
-        'minute' | 
-        'hour' | 
-        'day' | 
-        'week' | 
-        'month' | 
-        'year'
+          'millisecond' | 
+          'minute' | 
+          'hour' | 
+          'day' | 
+          'week' | 
+          'month' | 
+          'year'
         </code>
     </td>
     <td>Interval unit name.</td>
