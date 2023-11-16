@@ -136,7 +136,8 @@ export const Docs: FC<Props> = memo(() => {
     </tbody>
     </table>
     <h2 id="usage">Usage</h2>
-    <p>Check out an example.</p>    
+    <a target='_blank' href="https://codesandbox.io/s/throbbing-field-jgly5w?file=/src/App.js">Check out the playground in Codesandbox!</a>
+    <p>Check out an example.</p>
 <Copyable>
 <pre>
   <code className={styles.demoCode}>        

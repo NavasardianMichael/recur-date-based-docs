@@ -25,10 +25,11 @@ export const Copyable: FC<PropsWithOptionalChildren> = ({ children }) => {
 
     return (
         <div className={styles.copyable}>
-            <div className={combineClassNames(styles.installBlock, copied ? styles.disabled : '')} onClick={handleCopy}>
+            <div className={combineClassNames(styles.installBlock, copied ? styles.disabled : '')}>
                 <img 
                     className={styles.copyIcon} 
                     src={copied ? CheckMarkIcon : CopyIcon} 
+                    onClick={handleCopy}
                     alt='copy icon'
                 />
                 <div ref={contentRef}>{children}</div>

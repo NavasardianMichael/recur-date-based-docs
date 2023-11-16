@@ -8,12 +8,12 @@
     transition: .3s;
 
     .installBlock {
-        cursor: pointer;
-        user-select: none;
         box-sizing: border-box;
 
         &.disabled {
-            cursor: default;
+            & img {
+                cursor: default;
+            }
         }
         
         & code {
@@ -33,6 +33,7 @@
             float: right;
             margin-right: 1rem;
             margin-top: 1rem;
+            cursor: pointer;
         }
     }
 
