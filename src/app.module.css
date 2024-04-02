@@ -25,10 +25,13 @@
 
     & a {
         color: var(--primary-color);
+        font-weight: 500;
+        text-underline-offset: 3px;
     }
 
     & h2 {
         margin-top: 3rem;
+        color: var(--primary-color);
     }
 
     & pre {
