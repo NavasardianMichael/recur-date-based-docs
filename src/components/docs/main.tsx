@@ -117,7 +117,7 @@ export const Docs: FC<Props> = memo(() => {
         <>
           {`{`} 
           <br/>
-          &emsp;&emsp;&emsp;{`[key: string]: (args: {date: Date, dateStr: string}) => unknown`} 
+          &emsp;&emsp;&emsp;{`Record<string, (args: {date: Date, dateStr: string}) => unknown>`} 
           <br/> 
           {`}`}
         </>
