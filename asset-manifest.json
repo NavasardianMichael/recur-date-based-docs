@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/recur-date-based-docs/static/css/main.422119f8.css",
-    "main.js": "/recur-date-based-docs/static/js/main.a4701663.js",
+    "main.css": "/recur-date-based-docs/static/css/main.5425e4ac.css",
+    "main.js": "/recur-date-based-docs/static/js/main.0a131533.js",
     "static/media/logo.png": "/recur-date-based-docs/static/media/logo.582eafe4724cd9c00f2b.png",
     "index.html": "/recur-date-based-docs/index.html",
     "static/media/check-mark.svg": "/recur-date-based-docs/static/media/check-mark.9271d3c546bf29333f8eb7051dcb970c.svg",
     "static/media/copy-icon.svg": "/recur-date-based-docs/static/media/copy-icon.d8a39855de5a00f4501f5f3833ac89b1.svg",
-    "main.422119f8.css.map": "/recur-date-based-docs/static/css/main.422119f8.css.map",
-    "main.a4701663.js.map": "/recur-date-based-docs/static/js/main.a4701663.js.map"
+    "main.5425e4ac.css.map": "/recur-date-based-docs/static/css/main.5425e4ac.css.map",
+    "main.0a131533.js.map": "/recur-date-based-docs/static/js/main.0a131533.js.map"
   },
   "entrypoints": [
-    "static/css/main.422119f8.css",
-    "static/js/main.a4701663.js"
+    "static/css/main.5425e4ac.css",
+    "static/js/main.0a131533.js"
   ]
 }
