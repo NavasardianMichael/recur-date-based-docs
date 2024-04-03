@@ -113,16 +113,7 @@ export const Docs: FC<Props> = memo(() => {
     <tr>
     <td>extend</td>
     <td>
-      <code>
-        <>
-          {`{`} 
-          <br/>
-          &emsp;&emsp;&emsp;{`Record<string, (args: {date: Date, dateStr: string}) => unknown>`} 
-          <br/> 
-          {`}`}
-        </>
-        
-      </code>
+      <code>{`Record<string, (args: {date: Date, dateStr: string}) => unknown>`}</code>
     </td>
     <td>A container consisting of extra keys. The object accepts functions for its keys. The callback receives an object with <code>date</code> and <code>dateStr</code> properties of the current iteration. This can help to generate extended properties based on current occurrence.</td>
     <td><code>null</code></td>

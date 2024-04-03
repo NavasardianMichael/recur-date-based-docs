@@ -15,7 +15,14 @@
 }
 
 .app {
-    padding: 1rem 2rem;
+    display: flex;
+
+    .content {
+        overflow: auto;
+        padding: 1rem;
+        box-sizing: border-box;
+        max-height: 100vh;
+    }
 
     & code {
         padding: .25rem .5rem;
