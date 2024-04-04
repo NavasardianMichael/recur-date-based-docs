@@ -79,7 +79,7 @@ export const Docs: FC<Props> = memo(() => {
       </p>
       <h2 id='getting-started'>Getting Started</h2>
       <Copyable>
-        <div style={{ padding: "1rem" }}>npm install recur-date-based</div>
+        <div style={{ padding: "1rem" }}>npm install recur-date-based@latest</div>
       </Copyable>
       <p>
         Here are presented all the available parameters the exported function
@@ -147,7 +147,7 @@ export const Docs: FC<Props> = memo(() => {
             </td>
           </tr>
           <tr>
-            <td>numericTimezone</td>
+            <td>numericTimeZone</td>
             <td>
               <code>number</code>
             </td>
@@ -253,13 +253,13 @@ export const Docs: FC<Props> = memo(() => {
         </tbody>
       </table>
       <h2 id='usage'>Usage</h2>
-      <a
+      {/* <a
         target='_blank'
         href='https://codesandbox.io/s/throbbing-field-jgly5w?file=/src/App.js' 
         rel="noreferrer"
       >
         Check out the playground in Codesandbox!
-      </a>
+      </a> */}
       <p>Check out an example.</p>
       <Copyable>
         <pre>
@@ -267,10 +267,22 @@ export const Docs: FC<Props> = memo(() => {
             {`import { genRecurDateBasedList } from 'recur-date-based'
 
 genRecurDateBasedList({
-  start: '2022-01-01T00:00:00',
-  end: '2022-01-15T00:00:00',
-  interval: 3,
-  intervalType: 'day',
+  start: '2024-01-01T00:00:00',
+  end: '2024-03-15T00:00:00',
+  rules: [
+    {
+      unit: 'month',
+      portion: 1
+    },
+    {
+      unit: 'day',
+      portion: 3
+    },
+    {
+      unit: 'hour',
+      portion: 4
+    },
+  ],
   localeString: {
     lang: 'en-US',
     formatOptions: {
@@ -278,9 +290,9 @@ genRecurDateBasedList({
     }
   },
   // filtering only upcoming dates
-  filter: ({date, dateStr}) => date > new Date(),
+  filter: ({ date }) => date > new Date(),
   extend: {
-    isMonday: ({date, dateStr}) => date.getDay() === 1,
+    isMonday: ({ date }) => date.getDay() === 1,
   }
 })`}
           </code>
@@ -288,8 +300,8 @@ genRecurDateBasedList({
       </Copyable>
 
       <p>
-        The result is an array consisting of objects. The latters always include{" "}
-        <code>dateStr</code> property and extended ones optionally. Check out
+        The result is an array consisting of objects, which include{" "}
+        <code>date</code>, <code>utcDate</code>, <code>dateStr</code> properties, and the extended ones as well. Check out
         the result.
       </p>
 
@@ -297,11 +309,24 @@ genRecurDateBasedList({
         <pre>
           <code className={styles.demoCode}>
             {`[
-  { dateStr: '1/1/2022, 24:00:00', isMonday: false },
-  { dateStr: '1/4/2022, 24:00:00', isMonday: false },
-  { dateStr: '1/7/2022, 24:00:00', isMonday: false },
-  { dateStr: '1/10/2022, 24:00:00', isMonday: true },
-  { dateStr: '1/13/2022, 24:00:00', isMonday: false }
+    {
+        "dateStr": "1/1/2024, 00:00:00",
+        "date": "2024-01-01T00:00:00.000Z",
+        "utcDate": "2023-12-31T20:00:00.000Z",
+        "isMonday": true
+    },
+    {
+        "dateStr": "2/4/2024, 04:00:00",
+        "date": "2024-02-04T04:00:00.000Z",
+        "utcDate": "2024-02-04T00:00:00.000Z",
+        "isMonday": false
+    },
+    {
+        "dateStr": "3/7/2024, 08:00:00",
+        "date": "2024-03-07T08:00:00.000Z",
+        "utcDate": "2024-03-07T04:00:00.000Z",
+        "isMonday": false
+    }
 ]`}
           </code>
         </pre>
@@ -310,7 +335,7 @@ genRecurDateBasedList({
       <p>
         Check out another example with <code>direction</code> set to{" "}
         <code>'backwards'</code> and with applied custom{" "}
-        <code>numericTimezone</code> . The example was compiled in the time zone
+        <code>numericTimeZone</code> . The example was compiled in the time zone
         GMT+4.
       </p>
 
@@ -320,15 +345,15 @@ genRecurDateBasedList({
             {`import { genRecurDateBasedList } from 'recur-date-based'
 
 genRecurDateBasedList({
-  start: '2023-09-06T16:30:00',
-  end: 5,
-  interval: 1,
-  intervalType: 'day',
-  numericTimezone: 6,
-  direction: 'backward',
-  extend: {
-    timeStr: ({ dateStr }) => dateStr.split('T')[1]
-  },
+  start: new Date(),
+  end: 3,
+  rules: [
+    {
+      unit: 'day',
+      portion: 2
+    }
+  ],
+  numericTimeZone: 3,
   onError: (error) => {
     // do some stuff...
     console.log(error.message);
@@ -348,11 +373,21 @@ genRecurDateBasedList({
         <pre>
           <code className={styles.demoCode}>
             {`[
-  { dateStr: '2023-09-06T18:30:00', timeStr: '18:30:00' },
-  { dateStr: '2023-09-06T17:30:00', timeStr: '17:30:00' },
-  { dateStr: '2023-09-06T16:30:00', timeStr: '16:30:00' },
-  { dateStr: '2023-09-06T15:30:00', timeStr: '15:30:00' },
-  { dateStr: '2023-09-06T14:30:00', timeStr: '14:30:00' }
+    {
+        "dateStr": "2024-04-04T18:45:23",
+        "date": "2024-04-04T18:45:23.977Z",
+        "utcDate": "2024-04-04T15:45:23.977Z"
+    },
+    {
+        "dateStr": "2024-04-06T18:45:23",
+        "date": "2024-04-06T18:45:23.977Z",
+        "utcDate": "2024-04-06T15:45:23.977Z"
+    },
+    {
+        "dateStr": "2024-04-08T18:45:23",
+        "date": "2024-04-08T18:45:23.977Z",
+        "utcDate": "2024-04-08T15:45:23.977Z"
+    }
 ]`}
           </code>
         </pre>
