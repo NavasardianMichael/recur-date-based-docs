@@ -119,22 +119,31 @@ export const Docs: FC<Props> = memo(() => {
           </tr>
           <tr>
             <td>portion</td>
-            <td style={{minWidth: 580}}>
-              Array{`<{`} 
-                <br/>
-                  &emsp;&emsp;unit:                 
-                  &nbsp;<code>
-                  'millisecond' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year'
-                  </code>&nbsp;,
+            <td style={{minWidth: 600}}>
+              <code>
+                Array{`<{`} 
                   <br/>
-                  &emsp;&emsp;portion: 
-                  &nbsp;<code>number</code>
-                <br/> 
-              {`}>`}
+                    &emsp;&emsp;unit:                 
+                    &nbsp;
+                    'millisecond' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year',
+                    <br/>
+                    &emsp;&emsp;portion: 
+                    &nbsp;number
+                  <br/> 
+                {`}>`}
+              </code>
             </td>
-            <td>Interval unit name.</td>
-            <td>
-              <code>'day'</code>
+            <td>List of rules according to which each recurrence object will differ from the previous one.</td>
+            <td style={{minWidth: 122}}>
+              <code>
+                {`[{`} 
+                  <br/>
+                    &emsp;&emsp;unit: 'day',
+                    <br/>
+                    &emsp;&emsp;portion: 1
+                  <br/> 
+                {`}]`}
+              </code>
             </td>
           </tr>
           <tr>
@@ -165,7 +174,7 @@ export const Docs: FC<Props> = memo(() => {
               <code>Intl.LocalesArgument</code>
             </td>
             <td>
-              The first argument that receives the{" "}
+              The first argument which is passed to the{" "}
               <a
                 target='_blank'
                 rel='noreferrer'
@@ -185,7 +194,7 @@ export const Docs: FC<Props> = memo(() => {
               <code>Intl.DateTimeFormatOptions</code>
             </td>
             <td>
-              The second argument that receives the{" "}
+              The second argument which is passed to the{" "}
               <a
                 target='_blank'
                 rel='noreferrer'
