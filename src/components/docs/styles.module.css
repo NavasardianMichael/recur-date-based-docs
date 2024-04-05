@@ -1,31 +1,38 @@
 .docs {
     margin-top: 2rem;
 
-    .paramsTable {
-        text-align-last: left;
-        border-collapse: separate;
-        font-size: .8rem;
+    .typesList {
+        width: 100%;
+        overflow-x: auto;
 
+        .paramsTable {
+            width: 100%;
+            text-align-last: left;
+            border-collapse: separate;
+            font-size: .8rem;
+    
+    
+            & code:not(.demoCode) {
+                display: inline-block;
+                width: fit-content;
+            }
+            
+            & th,
+            & td {
+                border: 1px solid rgba(211, 211, 211, 0.6);
+                padding: .5rem;
+                word-wrap: break-word;
+                overflow-wrap: break-word; 
+            }
+    
+            & tr > th:nth-of-type(2) {
+                width: 505px;
+            }
+        }
+    
         & code:not(.demoCode) {
-            display: inline-block;
-            width: fit-content;
+            border: 1px solid var(--secondary-color);
+            font-size: .8rem;
         }
-        
-        & th,
-        & td {
-            border: 1px solid rgba(211, 211, 211, 0.6);
-            padding: .5rem;
-            word-wrap: break-word;
-            overflow-wrap: break-word; 
-        }
-
-        & tr > th:nth-of-type(2) {
-            width: 505px;
-        }
-    }
-
-    & code:not(.demoCode) {
-        border: 1px solid var(--secondary-color);
-        font-size: .8rem;
     }
 }

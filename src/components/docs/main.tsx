@@ -85,181 +85,188 @@ export const Docs: FC<Props> = memo(() => {
         Here are presented all the available parameters the exported function
         accepts.
       </p>
-      <table className={styles.paramsTable}>
-        <thead>
-          <tr>
-            <th>Property</th>
-            <th>Type</th>
-            <th>Description</th>
-            <th>Default</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td>start</td>
-            <td>
-              <code>string | Date</code>
-            </td>
-            <td>The start date or its any string representation.</td>
-            <td>today</td>
-          </tr>
-          <tr>
-            <td>end</td>
-            <td>
-              <code>number | string | Date</code>
-            </td>
-            <td>
-              Number of occurrences or the start date or any string
-              representation of it. The number larger than 99999 will is not
-              applicable (will cause an error).
-            </td>
-            <td>
-              <code>100</code>
-            </td>
-          </tr>
-          <tr>
-            <td>portion</td>
-            <td style={{minWidth: 600}}>
-              <code>
-                Array{`<{`} 
-                  <br/>
-                    &emsp;&emsp;unit:                 
-                    &nbsp;
-                    'millisecond' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year',
+      <div className={styles.typesList}>
+        <table className={styles.paramsTable}>
+          <thead>
+            <tr>
+              <th>Property</th>
+              <th>Type</th>
+              <th>Description</th>
+              <th>Default</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>start</td>
+              <td>
+                <code>string | Date</code>
+              </td>
+              <td>The start date or its any string representation.</td>
+              <td>today</td>
+            </tr>
+            <tr>
+              <td>end</td>
+              <td>
+                <code>number | string | Date</code>
+              </td>
+              <td>
+                Number of occurrences or the start date or any string
+                representation of it. The number larger than 99999 will is not
+                applicable (will cause an error).
+              </td>
+              <td>
+                <code>100</code>
+              </td>
+            </tr>
+            <tr>
+              <td>portion</td>
+              <td style={{minWidth: 600}}>
+                <code>
+                  Array{`<{`} 
                     <br/>
-                    &emsp;&emsp;portion: 
-                    &nbsp;number
-                  <br/> 
-                {`}>`}
-              </code>
-            </td>
-            <td>List of rules according to which each recurrence object will differ from the previous one.</td>
-            <td style={{minWidth: 122}}>
-              <code>
-                {`[{`} 
-                  <br/>
-                    &emsp;&emsp;unit: 'day',
+                      &emsp;&emsp;unit:                 
+                      &nbsp;
+                      'millisecond' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year',
+                      <br/>
+                      &emsp;&emsp;portion: 
+                      &nbsp;number
+                    <br/> 
+                  {`}>`}
+                </code>
+              </td>
+              <td>List of rules according to which each recurrence object will differ from the previous one.</td>
+              <td style={{minWidth: 122}}>
+                <code>
+                  {`[{`} 
                     <br/>
-                    &emsp;&emsp;portion: 1
-                  <br/> 
-                {`}]`}
-              </code>
-            </td>
-          </tr>
-          <tr>
-            <td>numericTimeZone</td>
-            <td>
-              <code>number</code>
-            </td>
-            <td>
-              A numeric representation of the timezone, based on which the
-              output will be formatted. Take into account that the provided
-              value must in a specific range: -12 to 12.
-            </td>
-            <td>user's timezone</td>
-          </tr>
-          <tr>
-            <td>direction</td>
-            <td>
-              <code>'forward' | 'backward'</code>
-            </td>
-            <td>Whether dates repeat to the future or the past.</td>
-            <td>
-              <code>'forward'</code>
-            </td>
-          </tr>
-          <tr>
-            <td>localeString.lang</td>
-            <td>
-              <code>Intl.LocalesArgument</code>
-            </td>
-            <td>
-              The first argument which is passed to the{" "}
-              <a
-                target='_blank'
-                rel='noreferrer'
-                href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString'
-              >
-                <code>Date.toLocaleString</code>
-              </a>{" "}
-              function.
-            </td>
-            <td>
-              <code>null</code>
-            </td>
-          </tr>
-          <tr>
-            <td>localeString.formatOptions</td>
-            <td>
-              <code>Intl.DateTimeFormatOptions</code>
-            </td>
-            <td>
-              The second argument which is passed to the{" "}
-              <a
-                target='_blank'
-                rel='noreferrer'
-                href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString'
-              >
-                <code>Date.toLocaleString</code>
-              </a>{" "}
-              function.
-            </td>
-            <td>
-              <code>null</code>
-            </td>
-          </tr>
-          <tr>
-            <td>filter</td>
-            <td>
-              <code>
-                {"(args: { date: Date, dateStr: string }) => boolean"}
-              </code>
-            </td>
-            <td>
-              Custom filter function. The date will be excluded from the result
-              if the callback for the corresponding date returns{" "}
-              <code>false</code>.
-            </td>
-            <td>
-              <code>null</code>
-            </td>
-          </tr>
-          <tr>
-            <td>extend</td>
-            <td>
-              <code>{`Record<string, (args: {date: Date, dateStr: string}) => unknown>`}</code>
-            </td>
-            <td>
-              A container consisting of extra keys. The object accepts functions
-              for its keys. The callback receives an object with{" "}
-              <code>date</code> and <code>dateStr</code> properties of the
-              current iteration. This can help to generate extended properties
-              based on current occurrence.
-            </td>
-            <td>
-              <code>null</code>
-            </td>
-          </tr>
-          <tr>
-            <td>onError</td>
-            <td>
-              <code>(error: Error) ={`>`} unknown</code>
-            </td>
-            <td>A callback to handle any error occurred.</td>
-            <td>
-              <code>null</code>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+                      &emsp;&emsp;unit: 'day',
+                      <br/>
+                      &emsp;&emsp;portion: 1
+                    <br/> 
+                  {`}]`}
+                </code>
+              </td>
+            </tr>
+            <tr>
+              <td>numericTimeZone</td>
+              <td>
+                <code>number</code>
+              </td>
+              <td>
+                A numeric representation of the timezone, based on which the
+                output will be formatted. Take into account that the provided
+                value must in a specific range: -12 to 12.
+              </td>
+              <td>user's timezone</td>
+            </tr>
+            <tr>
+              <td>direction</td>
+              <td>
+                <code>'forward' | 'backward'</code>
+              </td>
+              <td>Whether dates repeat to the future or the past.</td>
+              <td>
+                <code>'forward'</code>
+              </td>
+            </tr>
+            <tr>
+              <td>localeString.lang</td>
+              <td>
+                <code>Intl.LocalesArgument</code>
+              </td>
+              <td>
+                The first argument which is passed to the{" "}
+                <a
+                  target='_blank'
+                  rel='noreferrer'
+                  href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString'
+                >
+                  Date.toLocaleString
+                </a>{" "}
+                function.
+              </td>
+              <td>
+                <code>null</code>
+              </td>
+            </tr>
+            <tr>
+              <td>localeString.formatOptions</td>
+              <td>
+                <code>Intl.DateTimeFormatOptions</code>
+              </td>
+              <td>
+                The second argument which is passed to the{" "}
+                <a
+                  target='_blank'
+                  rel='noreferrer'
+                  href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString'
+                >
+                  Date.toLocaleString
+                </a>{" "}
+                function.
+                <br />
+                Avoid the conflict of defining both <code>timeZone</code> in formatOptions 
+                and the <code>numericTimeZone</code> properties simultaneously. 
+                Either provide <code>timeZone</code> property in <code>localeString.formatOptions</code> or define the timezone using the property <code>numericTimeZone</code>. 
+                Otherwise, the result is not guaranteed to be correct.
+              </td>
+              <td>
+                <code>null</code>
+              </td>
+            </tr>
+            <tr>
+              <td>filter</td>
+              <td>
+                <code>
+                  {"(args: { date: Date, dateStr: string }) => boolean"}
+                </code>
+              </td>
+              <td>
+                Custom filter function. The date will be excluded from the result
+                if the callback for the corresponding date returns{" "}
+                <code>false</code>.
+              </td>
+              <td>
+                <code>null</code>
+              </td>
+            </tr>
+            <tr>
+              <td>extend</td>
+              <td>
+                <code>{`Record<string, (args: {date: Date, dateStr: string}) => unknown>`}</code>
+              </td>
+              <td>
+                A container consisting of extra keys. The object accepts functions
+                for its keys. The callback receives an object with{" "}
+                <code>date</code> and <code>dateStr</code> properties of the
+                current iteration. This can help to generate extended properties
+                based on current occurrence.
+              </td>
+              <td>
+                <code>null</code>
+              </td>
+            </tr>
+            <tr>
+              <td>onError</td>
+              <td>
+                <code>(error: Error) ={`>`} unknown</code>
+              </td>
+              <td>A callback to handle any error occurred.</td>
+              <td>
+                <code>null</code>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <h2 id='usage'>Usage</h2>
-      {/* <a
+      <a
         target='_blank'
-        href='https://codesandbox.io/s/throbbing-field-jgly5w?file=/src/App.js' 
+        href='https://codesandbox.io/p/sandbox/react-typescript-forked-5qmyxf?file=%2Fsrc%2FApp.tsx%3A5%2C23' 
         rel="noreferrer"
       >
         Check out the playground in Codesandbox!
-      </a> */}
+      </a>
       <p>Check out an example.</p>
       <Copyable>
         <pre>
