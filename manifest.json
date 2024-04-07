@@ -1,6 +1,6 @@
 {
-  "short_name": "recur-date-based",
-  "name": "Docs of recur-date-based (NPM package)",
+  "short_name": "React App",
+  "name": "Create React App Sample",
   "icons": [
     {
       "src": "favicon.ico",
