@@ -11,30 +11,30 @@ export const Docs: FC<Props> = memo(() => {
         <summary>Table of Contents</summary>
         <ol>
           <li>
-            <a href='#about-the-project'>About The Project</a>
+            <a href="#about-the-project">About The Project</a>
           </li>
           <li>
-            <a href='#getting-started'>Getting Started</a>
+            <a href="#getting-started">Getting Started</a>
           </li>
           <li>
-            <a href='#usage'>Usage</a>
+            <a href="#usage">Usage</a>
           </li>
           <li>
-            <a href='#roadmap'>Roadmap</a>
+            <a href="#roadmap">Roadmap</a>
           </li>
           <li>
-            <a href='#contributing'>Contributing</a>
+            <a href="#contributing">Contributing</a>
           </li>
           <li>
-            <a href='#license'>License</a>
+            <a href="#license">License</a>
           </li>
           <li>
-            <a href='#contact'>Contact</a>
+            <a href="#contact">Contact</a>
           </li>
         </ol>
       </details>
 
-      <h2 id='about-the-project'>About The Project</h2>
+      <h2 id="about-the-project">About The Project</h2>
       <p>
         The project provides a unique functionality related to JavaScript dates.
         It allows to generate recurring dates based on a certain input shape.
@@ -45,41 +45,40 @@ export const Docs: FC<Props> = memo(() => {
       <p>
         There are some recurring date utilities, such as{" "}
         <a
-          target='_blank'
-          rel='noreferrer'
-          href='https://www.npmjs.com/package/recurring-date'
-        >
-          recurring-date
-        </a>{" "}
-        and{" "}
-        <a
-          target='_blank'
-          rel='noreferrer'
-          href='https://www.npmjs.com/package/moment-recur'
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.npmjs.com/package/moment-recur"
         >
           moment-recur
         </a>{" "}
-        available on NPM. But the first is className based and for second the{" "}
+        available on NPM, but the{" "}
         <a
-          target='_blank'
-          rel='noreferrer'
-          href='https://www.npmjs.com/package/moment'
+          target="_blank"
+          rel="noreferrer"
+          href="https://www.npmjs.com/package/moment"
         >
           moment
         </a>{" "}
-        is a must. So I didn't find any package that really suited my needs,
-        when I ran into the problem of providing such functionality․ Eventually
-        I created this enhanced one, which is function based, suitable for
-        TypeScript, and does not need additional mapping for extra properties.
+        is a must, which is not the most lightweight one. So I didn't find any
+        package that really suited my needs, when I ran into the problem of
+        providing such functionality․ Eventually I created this enhanced one,
+        which is <b>function-based</b>, <b>fully-typed</b>, very{" "}
+        <b>lightweight</b> and{" "}
+        <b>
+          doesn't require additional mapping for generation of extra properties
+        </b>{" "}
+        .
       </p>
       <p>
         If you have some idea about the next features of the current package,
         please suggest changes by forking this repo and creating a pull request
         or opening an issue.
       </p>
-      <h2 id='getting-started'>Getting Started</h2>
+      <h2 id="getting-started">Getting Started</h2>
       <Copyable>
-        <div style={{ padding: "1rem" }}>npm install recur-date-based@latest</div>
+        <div style={{ padding: "1rem" }}>
+          npm install recur-date-based@latest
+        </div>
       </Copyable>
       <p>
         Here are presented all the available parameters the exported function
@@ -101,7 +100,11 @@ export const Docs: FC<Props> = memo(() => {
               <td>
                 <code>string | Date</code>
               </td>
-              <td>The start date or its any string representation.</td>
+              <td>
+                Start of the occurrence: date object (a valid instance of the
+                <code>Date</code> constructor) or a valid string representation
+                of date (e.g. 11/28/2024).
+              </td>
               <td>today</td>
             </tr>
             <tr>
@@ -110,39 +113,42 @@ export const Docs: FC<Props> = memo(() => {
                 <code>number | string | Date</code>
               </td>
               <td>
-                Number of occurrences or the start date or any string
-                representation of it. The number larger than 99999 will is not
-                applicable (will cause an error).
+                End of the occurrence: Start of the occurrence: a date object (a
+                valid instance of the <code>Date</code> constructor) or a valid
+                string representation of date (e.g. 11/28/2024) or number of
+                occurrences (a number larger than 99999 is not applicable (will
+                cause an error)).
               </td>
               <td>
                 <code>100</code>
               </td>
             </tr>
             <tr>
-              <td>portion</td>
-              <td style={{minWidth: 600}}>
+              <td>rules</td>
+              <td style={{ minWidth: 600 }}>
                 <code>
-                  Array{`<{`} 
-                    <br/>
-                      &emsp;&emsp;unit:                 
-                      &nbsp;
-                      'millisecond' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year',
-                      <br/>
-                      &emsp;&emsp;portion: 
-                      &nbsp;number
-                    <br/> 
+                  Array{`<{`}
+                  <br />
+                  &emsp;&emsp;unit: &nbsp; 'millisecond' | 'minute' | 'hour' |
+                  'day' | 'week' | 'month' | 'year',
+                  <br />
+                  &emsp;&emsp;portion: &nbsp;number
+                  <br />
                   {`}>`}
                 </code>
               </td>
-              <td>List of rules according to which each recurrence object will differ from the previous one.</td>
-              <td style={{minWidth: 122}}>
+              <td>
+                List of rules according to which each recurrence object will
+                differ from the previous one.
+              </td>
+              <td style={{ minWidth: 122 }}>
                 <code>
-                  {`[{`} 
-                    <br/>
-                      &emsp;&emsp;unit: 'day',
-                      <br/>
-                      &emsp;&emsp;portion: 1
-                    <br/> 
+                  {`[{`}
+                  <br />
+                  &emsp;&emsp;unit: 'day',
+                  <br />
+                  &emsp;&emsp;portion: 1
+                  <br />
                   {`}]`}
                 </code>
               </td>
@@ -155,7 +161,7 @@ export const Docs: FC<Props> = memo(() => {
               <td>
                 A numeric representation of the timezone, based on which the
                 output will be formatted. Take into account that the provided
-                value must in a specific range: -12 to 12.
+                value must in a specific range (-12 to 12).
               </td>
               <td>user's timezone</td>
             </tr>
@@ -164,7 +170,9 @@ export const Docs: FC<Props> = memo(() => {
               <td>
                 <code>'forward' | 'backward'</code>
               </td>
-              <td>Whether dates repeat to the future or the past.</td>
+              <td>
+                Indicates whether dates repeat in the future or in the past.
+              </td>
               <td>
                 <code>'forward'</code>
               </td>
@@ -177,9 +185,9 @@ export const Docs: FC<Props> = memo(() => {
               <td>
                 The first argument which is passed to the{" "}
                 <a
-                  target='_blank'
-                  rel='noreferrer'
-                  href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString'
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString"
                 >
                   Date.toLocaleString
                 </a>{" "}
@@ -197,18 +205,20 @@ export const Docs: FC<Props> = memo(() => {
               <td>
                 The second argument which is passed to the{" "}
                 <a
-                  target='_blank'
-                  rel='noreferrer'
-                  href='https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString'
+                  target="_blank"
+                  rel="noreferrer"
+                  href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/toLocaleString"
                 >
                   Date.toLocaleString
                 </a>{" "}
                 function.
                 <br />
-                Avoid the conflict of defining both <code>timeZone</code> in formatOptions 
-                and the <code>numericTimeZone</code> properties simultaneously. 
-                Either provide <code>timeZone</code> property in <code>localeString.formatOptions</code> or define the timezone using the property <code>numericTimeZone</code>. 
-                Otherwise, the result is not guaranteed to be correct.
+                Avoid the conflict of defining both <code>timeZone</code> in
+                formatOptions and the <code>numericTimeZone</code> properties
+                simultaneously. Either provide <code>timeZone</code> property in{" "}
+                <code>localeString.formatOptions</code> or define the timezone
+                using the property <code>numericTimeZone</code>. Otherwise, the
+                result is not guaranteed to be correct.
               </td>
               <td>
                 <code>null</code>
@@ -222,9 +232,9 @@ export const Docs: FC<Props> = memo(() => {
                 </code>
               </td>
               <td>
-                Custom filter function. The date will be excluded from the result
-                if the callback for the corresponding date returns{" "}
-                <code>false</code>.
+                Custom filter function. The date will be excluded from the
+                result if the callback for the corresponding date returns a
+                falsy value, otherwise, it will be included in the output.
               </td>
               <td>
                 <code>null</code>
@@ -236,11 +246,27 @@ export const Docs: FC<Props> = memo(() => {
                 <code>{`Record<string, (args: {date: Date, dateStr: string}) => unknown>`}</code>
               </td>
               <td>
-                A container consisting of extra keys. The object accepts functions
-                for its keys. The callback receives an object with{" "}
-                <code>date</code> and <code>dateStr</code> properties of the
-                current iteration. This can help to generate extended properties
-                based on current occurrence.
+                Probably the most valuable feature of the package for extending
+                the output with desirable extra values, generated manually by
+                the user.
+                <ul>
+                  <li>
+                    An object, which accepts a function for each of its key.
+                  </li>
+                  <li>
+                    Each function will be supplied with an object containing the{" "}
+                    <code>date</code> and <code>dateStr</code> (string
+                    representation of the <code>date</code>) properties of the
+                    current iteration (occurrence).
+                  </li>
+                  <li>
+                    In the output, each occurrence object, except of the basic
+                    properties, will contain the values returned from the
+                    corresponding function that the user provided and those
+                    values will be assigned to the corresponding keys the user
+                    defined
+                  </li>
+                </ul>
               </td>
               <td>
                 <code>null</code>
@@ -251,7 +277,10 @@ export const Docs: FC<Props> = memo(() => {
               <td>
                 <code>(error: Error) ={`>`} unknown</code>
               </td>
-              <td>A callback to handle any error occurred.</td>
+              <td>
+                A callback to handle any error occurred during the recurring
+                process.
+              </td>
               <td>
                 <code>null</code>
               </td>
@@ -259,10 +288,10 @@ export const Docs: FC<Props> = memo(() => {
           </tbody>
         </table>
       </div>
-      <h2 id='usage'>Usage</h2>
+      <h2 id="usage">Usage</h2>
       <a
-        target='_blank'
-        href='https://codesandbox.io/p/sandbox/react-typescript-forked-5qmyxf?file=%2Fsrc%2FApp.tsx%3A5%2C23' 
+        target="_blank"
+        href="https://codesandbox.io/p/sandbox/react-typescript-forked-5qmyxf?file=%2Fsrc%2FApp.tsx%3A5%2C23"
         rel="noreferrer"
       >
         Check out the playground in Codesandbox!
@@ -308,8 +337,8 @@ genRecurDateBasedList({
 
       <p>
         The result is an array consisting of objects, which include{" "}
-        <code>date</code>, <code>utcDate</code>, <code>dateStr</code> properties, and the extended ones as well. Check out
-        the result.
+        <code>date</code>, <code>utcDate</code>, <code>dateStr</code>{" "}
+        properties, and the extended ones as well. Check out the result.
       </p>
 
       <Copyable>
@@ -399,7 +428,7 @@ genRecurDateBasedList({
           </code>
         </pre>
       </Copyable>
-      <h2 id='roadmap'>Roadmap</h2>
+      <h2 id="roadmap">Roadmap</h2>
       <div> &#10003; Extended props</div>
       <div> &#10003; Exclude (filter) functionality</div>
       <div> &#10003; Error handling</div>
@@ -409,12 +438,12 @@ genRecurDateBasedList({
       <div> &minus; Short formatting (e.g. dd/mm/yyyy)</div>
       <p>
         See the{" "}
-        <a href='https://github.com/NavasardianMichael/recur-date-based/issues'>
+        <a href="https://github.com/NavasardianMichael/recur-date-based/issues">
           open issues
         </a>{" "}
         for a full list of proposed features (and known issues).
       </p>
-      <h2 id='contributing'>Contributing</h2>
+      <h2 id="contributing">Contributing</h2>
       <p>
         Contributions are what make the open source community such an amazing
         place to learn, inspire, and create. Any contributions you make are{" "}
@@ -423,9 +452,9 @@ genRecurDateBasedList({
       <p>
         If you have a suggestion that would make this better, please fork the{" "}
         <a
-          target='_blank'
-          rel='noreferrer'
-          href='https://github.com/NavasardianMichael/recur-date-based'
+          target="_blank"
+          rel="noreferrer"
+          href="https://github.com/NavasardianMichael/recur-date-based"
         >
           Github Repository
         </a>{" "}
@@ -449,15 +478,15 @@ genRecurDateBasedList({
         </li>
         <li>Open a Pull Request</li>
       </ol>
-      <h2 id='license'>License</h2>
+      <h2 id="license">License</h2>
       <p>Distributed under the MIT License</p>
-      <h2 id='contact'>Contact</h2>
+      <h2 id="contact">Contact</h2>
       <p>
         Email -{" "}
         <a
-          target='_blank'
-          rel='noreferrer'
-          href='mailto:navasardianmichael@gmail.com'
+          target="_blank"
+          rel="noreferrer"
+          href="mailto:navasardianmichael@gmail.com"
         >
           navasardianmichael@gmail.com
         </a>
@@ -465,16 +494,16 @@ genRecurDateBasedList({
       <p>
         LinkedIn -{" "}
         <a
-          target='_blank'
-          rel='noreferrer'
-          href='https://linkedin.com/in/michael-navasardyan'
+          target="_blank"
+          rel="noreferrer"
+          href="https://linkedin.com/in/michael-navasardyan"
         >
           https://linkedin.com/in/michael-navasardyan
         </a>
       </p>
       <p>
         Project -{" "}
-        <a href='https://github.com/NavasardianMichael/recur-date-based'>
+        <a href="https://github.com/NavasardianMichael/recur-date-based">
           https://github.com/NavasardianMichael/recur-date-based
         </a>
       </p>

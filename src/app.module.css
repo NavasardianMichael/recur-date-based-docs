@@ -19,8 +19,8 @@
 
   @media only screen and (max-width: 600px) {
     & {
-        padding: .5rem 1rem;
-        text-wrap: balance;
+      padding: 0.5rem 1rem;
+      text-wrap: balance;
     }
   }
 
