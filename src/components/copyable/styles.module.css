@@ -4,8 +4,10 @@
   border-radius: 6px;
   border-color: var(--secondary-color);
   max-width: 750px;
+  box-sizing: border-box;
   width: fit-content;
   min-width: 500px;
+  padding: 0.75rem;
   transition: 0.3s;
 
   @media only screen and (max-width: 600px) {
@@ -19,6 +21,8 @@
 
   .installBlock {
     box-sizing: border-box;
+    display: flex;
+    align-items: flex-start;
     overflow-x: auto;
 
     &.disabled {
@@ -33,19 +37,21 @@
       width: 100%;
       max-width: 100%;
       white-space: pre-wrap;
-      padding: 1rem;
       font-size: 0.9rem;
       display: block;
       overflow-x: auto;
     }
 
+    & > div {
+      flex: 1;
+      min-width: 0;
+    }
+
     & > img {
+      flex-shrink: 0;
       width: 20px;
       transition: 0.3s;
       opacity: 0.3;
-      float: right;
-      margin-right: 1rem;
-      margin-top: 1rem;
       cursor: pointer;
     }
   }

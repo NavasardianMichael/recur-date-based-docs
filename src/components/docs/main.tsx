@@ -75,7 +75,7 @@ export const Docs: FC<Props> = memo(() => {
           <b>
             doesn't require additional mapping for generation of extra properties
           </b>{" "}
-          .
+          . Supports both step-based and cron rules, filtering and extending the output, both forward and backward direction, custom timezone, locale, formatting and error handling.
         </p>
         <p>
           If you have some idea about the next features of the current package,
@@ -84,54 +84,67 @@ export const Docs: FC<Props> = memo(() => {
         </p>
       </section>
       <h2 id="getting-started">Getting Started</h2>
-      <Copyable>
-        <CodeBlock language="bash">{`# npm
-npm install recur-date-based@latest
-
-# pnpm
-pnpm add recur-date-based@latest
-
-# yarn
-yarn add recur-date-based@latest`}</CodeBlock>
-      </Copyable>
+      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+        <Copyable>
+          <CodeBlock language="bash">{`npm install recur-date-based@latest`}</CodeBlock>
+        </Copyable>
+        <Copyable>
+          <CodeBlock language="bash">{`pnpm add recur-date-based@latest`}</CodeBlock>
+        </Copyable>
+        <Copyable>
+          <CodeBlock language="bash">{`yarn add recur-date-based@latest`}</CodeBlock>
+        </Copyable>
+      </div>
       <h2 id="api-reference">API Reference</h2>
       <h3>Exports</h3>
-      <table className={styles.paramsTable}>
-        <thead>
-          <tr>
-            <th>Export</th>
-            <th>Type</th>
-            <th>Description</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <td><code>genRecurDateBasedList</code></td>
-            <td><code>(args?) ={`>`} T_CoreReturnType[]</code></td>
-            <td>Main function to generate recurring dates</td>
-          </tr>
-          <tr>
-            <td><code>formatDate</code></td>
-            <td><code>(date, format, locale?) ={`>`} string</code></td>
-            <td>Format a date using a supported output format</td>
-          </tr>
-          <tr>
-            <td><code>OUTPUT_FORMATS</code></td>
-            <td><code>readonly string[]</code></td>
-            <td>List of supported format strings</td>
-          </tr>
-          <tr>
-            <td><code>T_OutputFormat</code></td>
-            <td>type</td>
-            <td>Union of all supported format strings</td>
-          </tr>
-          <tr>
-            <td><code>T_Rules</code></td>
-            <td>type</td>
-            <td>Step-based rules or cron string</td>
-          </tr>
-        </tbody>
-      </table>
+      <div className={styles.typesList}>
+        <table className={styles.paramsTable}>
+          <thead>
+            <tr>
+              <th>Export</th>
+              <th>Type</th>
+              <th>Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>genRecurDateBasedList</td>
+              <td>
+                <CodeBlock language="typescript">{`(args?) => T_CoreReturnType[]`}</CodeBlock>
+              </td>
+              <td>Main function to generate recurring dates</td>
+            </tr>
+            <tr>
+              <td>formatDate</td>
+              <td>
+                <CodeBlock language="typescript">{`(date, format, locale?) => string`}</CodeBlock>
+              </td>
+              <td>Format a date using a supported output format</td>
+            </tr>
+            <tr>
+              <td>OUTPUT_FORMATS</td>
+              <td>
+                <CodeBlock language="typescript">{`readonly string[]`}</CodeBlock>
+              </td>
+              <td>List of supported format strings</td>
+            </tr>
+            <tr>
+              <td>T_OutputFormat</td>
+              <td>
+                <CodeBlock language="typescript">{`type`}</CodeBlock>
+              </td>
+              <td>Union of all supported format strings</td>
+            </tr>
+            <tr>
+              <td>T_Rules</td>
+              <td>
+                <CodeBlock language="typescript">{`type`}</CodeBlock>
+              </td>
+              <td>Step-based rules or cron string</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
       <h3>genRecurDateBasedList Parameters</h3>
       <p>
         Here are presented all the available parameters the exported function
@@ -564,8 +577,8 @@ genRecurDateBasedList({
       </ol>
       <h2 id="license">License</h2>
       <p>Distributed under the MIT License</p>
-      <h2 id="contact">Contact</h2>
-      <p>
+      <h2 id="contact" style={{ marginBottom: 4, marginTop: 4 }}>Contact</h2>
+      <p style={{ marginBottom: 4, marginTop: 4 }}>
         Email -{" "}
         <a
           target="_blank"
@@ -575,7 +588,7 @@ genRecurDateBasedList({
           navasardianmichael@gmail.com
         </a>
       </p>
-      <p>
+      <p style={{ marginBottom: 4, marginTop: 4 }}>
         LinkedIn -{" "}
         <a
           target="_blank"
@@ -585,7 +598,7 @@ genRecurDateBasedList({
           https://linkedin.com/in/michael-navasardyan
         </a>
       </p>
-      <p>
+      <p style={{ marginBottom: 4, marginTop: 4 }}>
         Project -{" "}
         <a href="https://github.com/NavasardianMichael/recur-date-based">
           https://github.com/NavasardianMichael/recur-date-based
