@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/recur-date-based-docs/static/css/main.2e1f7f4d.css",
-    "main.js": "/recur-date-based-docs/static/js/main.17d4f3f6.js",
-    "static/media/logo.png": "/recur-date-based-docs/static/media/logo.582eafe4724cd9c00f2b.png",
-    "index.html": "/recur-date-based-docs/index.html",
-    "static/media/check-mark.svg": "/recur-date-based-docs/static/media/check-mark.9271d3c546bf29333f8eb7051dcb970c.svg",
-    "static/media/copy-icon.svg": "/recur-date-based-docs/static/media/copy-icon.d8a39855de5a00f4501f5f3833ac89b1.svg",
-    "main.2e1f7f4d.css.map": "/recur-date-based-docs/static/css/main.2e1f7f4d.css.map",
-    "main.17d4f3f6.js.map": "/recur-date-based-docs/static/js/main.17d4f3f6.js.map"
+    "main.css": "./static/css/main.a446c987.css",
+    "main.js": "./static/js/main.8f5e3a35.js",
+    "static/media/logo.png": "./static/media/logo.582eafe4724cd9c00f2b.png",
+    "index.html": "./index.html",
+    "static/media/check-mark.svg": "./static/media/check-mark.7fc559f7cd154e5d6dfdabab653c00ad.svg",
+    "static/media/copy-icon.svg": "./static/media/copy-icon.ef3d433ba2de4c2577fb3f7444512fa9.svg",
+    "main.a446c987.css.map": "./static/css/main.a446c987.css.map",
+    "main.8f5e3a35.js.map": "./static/js/main.8f5e3a35.js.map"
   },
   "entrypoints": [
-    "static/css/main.2e1f7f4d.css",
-    "static/js/main.17d4f3f6.js"
+    "static/css/main.a446c987.css",
+    "static/js/main.8f5e3a35.js"
   ]
 }
