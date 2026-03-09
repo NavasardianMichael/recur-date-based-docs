@@ -1,0 +1,9 @@
+.code {
+  white-space: pre-wrap;
+  word-break: break-word;
+  background: transparent !important;
+}
+
+.inlineCode {
+  display: inline;
+}

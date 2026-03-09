@@ -1,47 +1,60 @@
 .copyable {
-    background-color: rgba(34,34,34,.03);
-    border-width: 1px;
-    border-style: solid;
-    border-radius: 6px;
-    border-color: var(--secondary-color);
-    max-width: 600px;
-    transition: .3s;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 6px;
+  border-color: var(--secondary-color);
+  max-width: 750px;
+  width: fit-content;
+  min-width: 500px;
+  transition: 0.3s;
 
-    .installBlock {
-        box-sizing: border-box;
+  @media only screen and (max-width: 600px) {
+    & {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      display: block;
+    }
+  }
 
-        &.disabled {
-            & img {
-                cursor: default;
-            }
-        }
-        
-        & code {
-            box-sizing: border-box;
-            width: 100%;
-            padding: 1rem;
-            white-space: pre-wrap;
-            padding: 1rem;
-            font-size: .9rem;
-            display: block;
-        }
-    
-        & > img {
-            width: 20px;
-            transition: .3s;
-            opacity: .3;
-            float: right;
-            margin-right: 1rem;
-            margin-top: 1rem;
-            cursor: pointer;
-        }
+  .installBlock {
+    box-sizing: border-box;
+    overflow-x: auto;
+
+    &.disabled {
+      & img {
+        cursor: default;
+      }
     }
 
-    &:hover {
-        border-color: rgb(182, 182, 182);
-
-        & img {
-            opacity: .5;
-        }
+    & code,
+    & pre {
+      box-sizing: border-box;
+      width: 100%;
+      max-width: 100%;
+      white-space: pre-wrap;
+      padding: 1rem;
+      font-size: 0.9rem;
+      display: block;
+      overflow-x: auto;
     }
+
+    & > img {
+      width: 20px;
+      transition: 0.3s;
+      opacity: 0.3;
+      float: right;
+      margin-right: 1rem;
+      margin-top: 1rem;
+      cursor: pointer;
+    }
+  }
+
+  &:hover {
+    border-color: rgb(182, 182, 182);
+
+    & img {
+      opacity: 0.5;
+    }
+  }
 }

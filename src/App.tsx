@@ -6,7 +6,9 @@ function App() {
   return (
     <div className={styles.app}>
       <Header />
-      <Docs />
+      <main id="main-content" tabIndex={-1}>
+        <Docs />
+      </main>
     </div>
   );
 }

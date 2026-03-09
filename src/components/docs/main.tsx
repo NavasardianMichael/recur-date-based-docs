@@ -1,94 +1,98 @@
 import { FC, memo } from "react";
 import { Copyable } from "components/copyable/main";
+import { CodeBlock } from "components/code-block/CodeBlock";
+import { InlineCode } from "components/code-block/InlineCode";
 import styles from "./styles.module.css";
 
 type Props = {};
 
 export const Docs: FC<Props> = memo(() => {
   return (
-    <div className={styles.docs}>
-      <details open>
-        <summary>Table of Contents</summary>
-        <ol>
-          <li>
-            <a href="#about-the-project">About The Project</a>
-          </li>
-          <li>
-            <a href="#getting-started">Getting Started</a>
-          </li>
-          <li>
-            <a href="#api-reference">API Reference</a>
-          </li>
-          <li>
-            <a href="#usage">Usage & Examples</a>
-          </li>
-          <li>
-            <a href="#roadmap">Roadmap</a>
-          </li>
-          <li>
-            <a href="#contributing">Contributing</a>
-          </li>
-          <li>
-            <a href="#license">License</a>
-          </li>
-          <li>
-            <a href="#contact">Contact</a>
-          </li>
-        </ol>
-      </details>
+    <article className={styles.docs}>
+      <nav aria-label="Table of contents">
+        <details open>
+          <summary>Table of Contents</summary>
+          <ol>
+            <li>
+              <a href="#about-the-project">About The Project</a>
+            </li>
+            <li>
+              <a href="#getting-started">Getting Started</a>
+            </li>
+            <li>
+              <a href="#api-reference">API Reference</a>
+            </li>
+            <li>
+              <a href="#usage">Usage & Examples</a>
+            </li>
+            <li>
+              <a href="#roadmap">Roadmap</a>
+            </li>
+            <li>
+              <a href="#contributing">Contributing</a>
+            </li>
+            <li>
+              <a href="#license">License</a>
+            </li>
+            <li>
+              <a href="#contact">Contact</a>
+            </li>
+          </ol>
+        </details>
+      </nav>
 
-      <h2 id="about-the-project">About The Project</h2>
-      <p>
-        The project provides a unique functionality related to JavaScript dates.
-        It allows to generate recurring dates based on a certain input shape.
-        Its name is in harmony with its essence: the exported function gives an
-        opportunity to generate additional properties based on the date of the
-        current iteration.
-      </p>
-      <p>
-        There are some recurring date utilities, such as{" "}
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href="https://www.npmjs.com/package/moment-recur"
-        >
-          moment-recur
-        </a>{" "}
-        available on NPM, but the{" "}
-        <a
-          target="_blank"
-          rel="noreferrer"
-          href="https://www.npmjs.com/package/moment"
-        >
-          moment
-        </a>{" "}
-        is a must, which is not the most lightweight one. So I didn't find any
-        package that really suited my needs, when I ran into the problem of
-        providing such functionality․ Eventually I created this enhanced one,
-        which is <b>function-based</b>, <b>fully-typed</b>, very{" "}
-        <b>lightweight</b> and{" "}
-        <b>
-          doesn't require additional mapping for generation of extra properties
-        </b>{" "}
-        .
-      </p>
-      <p>
-        If you have some idea about the next features of the current package,
-        please suggest changes by forking this repo and creating a pull request
-        or opening an issue.
-      </p>
+      <section aria-labelledby="about-the-project">
+        <h2 id="about-the-project">About The Project</h2>
+        <p>
+          The project provides a unique functionality related to JavaScript dates.
+          It allows to generate recurring dates based on a certain input shape.
+          Its name is in harmony with its essence: the exported function gives an
+          opportunity to generate additional properties based on the date of the
+          current iteration.
+        </p>
+        <p>
+          There are some recurring date utilities, such as{" "}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.npmjs.com/package/moment-recur"
+          >
+            moment-recur
+          </a>{" "}
+          available on NPM, but the{" "}
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href="https://www.npmjs.com/package/moment"
+          >
+            moment
+          </a>{" "}
+          is a must, which is not the most lightweight one. So I didn't find any
+          package that really suited my needs, when I ran into the problem of
+          providing such functionality․ Eventually I created this enhanced one,
+          which is <b>function-based</b>, <b>fully-typed</b>, very{" "}
+          <b>lightweight</b> and{" "}
+          <b>
+            doesn't require additional mapping for generation of extra properties
+          </b>{" "}
+          .
+        </p>
+        <p>
+          If you have some idea about the next features of the current package,
+          please suggest changes by forking this repo and creating a pull request
+          or opening an issue.
+        </p>
+      </section>
       <h2 id="getting-started">Getting Started</h2>
       <Copyable>
-        <pre style={{ padding: "1rem", margin: 0 }}>
-          <code>{`# npm
+        <CodeBlock language="bash">{`# npm
 npm install recur-date-based@latest
 
 # pnpm
 pnpm add recur-date-based@latest
 
 # yarn
-yarn add recur-date-based@latest`}</code>
-        </pre>
+yarn add recur-date-based@latest`}</CodeBlock>
       </Copyable>
       <h2 id="api-reference">API Reference</h2>
       <h3>Exports</h3>
@@ -147,11 +151,11 @@ yarn add recur-date-based@latest`}</code>
             <tr>
               <td>start</td>
               <td>
-                <code>string | Date</code>
+                <InlineCode>string | Date</InlineCode>
               </td>
               <td>
-                Start of the occurrence: date object (a valid instance of the
-                <code>Date</code> constructor) or a valid string representation
+                Start of the occurrence: date object (a valid instance of the{' '}
+                <InlineCode>Date</InlineCode> constructor) or a valid string representation
                 of date (e.g. 11/28/2024).
               </td>
               <td>today</td>
@@ -159,62 +163,52 @@ yarn add recur-date-based@latest`}</code>
             <tr>
               <td>end</td>
               <td>
-                <code>number | string | Date</code>
+                <InlineCode>number | string | Date</InlineCode>
               </td>
               <td>
                 End of the occurrence: a date object (a valid instance of the{' '}
-                <code>Date</code> constructor) or a valid string representation
+                <InlineCode>Date</InlineCode> constructor) or a valid string representation
                 of date (e.g. 11/28/2024) or number of occurrences (max 99_999).
               </td>
               <td>
-                <code>10</code>
+                <InlineCode>10</InlineCode>
               </td>
             </tr>
             <tr>
               <td>rules</td>
               <td style={{ minWidth: 600 }}>
-                <code>
-                  T_Rule[] | string
-                  <br />
-                  Step-based: Array{`<{`} unit: 'millisecond' | 'minute' | 'hour' |
-                  'day' | 'week' | 'month' | 'year', portion: number {`}>`}
-                  <br />
-                  Cron: 5-field string (minute hour dayOfMonth month dayOfWeek)
-                </code>
+                <CodeBlock language="typescript">{`T_Rule[] | string
+Step-based: Array<{ unit: 'millisecond' | 'minute' | 'hour' | 'day' | 'week' | 'month' | 'year', portion: number }>
+Cron: 5-field string (minute hour dayOfMonth month dayOfWeek)`}</CodeBlock>
               </td>
               <td>
                 Step-based rules or cron expression. Cron format:{' '}
-                <code>minute hour dayOfMonth month dayOfWeek</code> (e.g.{' '}
-                <code>0 9 * * 1-5</code> for weekdays at 9am).
+                <InlineCode>minute hour dayOfMonth month dayOfWeek</InlineCode> (e.g.{' '}
+                <InlineCode>0 9 * * 1-5</InlineCode> for weekdays at 9am).
               </td>
               <td style={{ minWidth: 122 }}>
-                <code>
-                  {`[{`}
-                  <br />
-                  &emsp;&emsp;unit: 'day',
-                  <br />
-                  &emsp;&emsp;portion: 1
-                  <br />
-                  {`}]`}
-                </code>
+                <CodeBlock language="typescript">{`[{
+  unit: 'day',
+  portion: 1
+}]`}</CodeBlock>
               </td>
             </tr>
             <tr>
               <td>outputFormat</td>
               <td>
-                <code>T_OutputFormat</code>
+                <InlineCode>T_OutputFormat</InlineCode>
               </td>
               <td>
-                Format string for <code>dateStr</code>. Use one of{' '}
-                <code>OUTPUT_FORMATS</code> (e.g. <code>YYYY-MM-DD</code>,{' '}
-                <code>YYYY-MM-DD HH:MM</code>).
+                Format string for <InlineCode>dateStr</InlineCode>. Use one of{' '}
+                <InlineCode>OUTPUT_FORMATS</InlineCode> (e.g. <InlineCode>YYYY-MM-DD</InlineCode>,{' '}
+                <InlineCode>YYYY-MM-DD HH:MM</InlineCode>).
               </td>
               <td>—</td>
             </tr>
             <tr>
               <td>numericTimeZone</td>
               <td>
-                <code>number</code>
+                <InlineCode>number</InlineCode>
               </td>
               <td>
                 A numeric representation of the timezone, based on which the
@@ -226,19 +220,19 @@ yarn add recur-date-based@latest`}</code>
             <tr>
               <td>direction</td>
               <td>
-                <code>'forward' | 'backward'</code>
+                <InlineCode>'forward' | 'backward'</InlineCode>
               </td>
               <td>
                 Indicates whether dates repeat in the future or in the past.
               </td>
               <td>
-                <code>'forward'</code>
+                <InlineCode>'forward'</InlineCode>
               </td>
             </tr>
             <tr>
               <td>localeString.lang</td>
               <td>
-                <code>Intl.LocalesArgument</code>
+                <InlineCode>Intl.LocalesArgument</InlineCode>
               </td>
               <td>
                 The first argument which is passed to the{" "}
@@ -252,13 +246,13 @@ yarn add recur-date-based@latest`}</code>
                 function.
               </td>
               <td>
-                <code>null</code>
+                <InlineCode>null</InlineCode>
               </td>
             </tr>
             <tr>
               <td>localeString.formatOptions</td>
               <td>
-                <code>Intl.DateTimeFormatOptions</code>
+                <InlineCode>Intl.DateTimeFormatOptions</InlineCode>
               </td>
               <td>
                 The second argument which is passed to the{" "}
@@ -271,27 +265,25 @@ yarn add recur-date-based@latest`}</code>
                 </a>{" "}
                 function.
                 <br />
-                Avoid the conflict of defining both <code>timeZone</code> in
-                formatOptions and the <code>numericTimeZone</code> properties
-                simultaneously. Either provide <code>timeZone</code> property in{" "}
-                <code>localeString.formatOptions</code> or define the timezone
-                using the property <code>numericTimeZone</code>. Otherwise, the
+                Avoid the conflict of defining both <InlineCode>timeZone</InlineCode> in
+                formatOptions and the <InlineCode>numericTimeZone</InlineCode> properties
+                simultaneously. Either provide <InlineCode>timeZone</InlineCode> property in{" "}
+                <InlineCode>localeString.formatOptions</InlineCode> or define the timezone
+                using the property <InlineCode>numericTimeZone</InlineCode>. Otherwise, the
                 result is not guaranteed to be correct.
               </td>
               <td>
-                <code>null</code>
+                <InlineCode>null</InlineCode>
               </td>
             </tr>
             <tr>
               <td>filter</td>
               <td>
-                <code>
-                  {"(args: { date: Date, utcDate: Date, dateStr: string }) => boolean"}
-                </code>
+                <InlineCode>{"(args: { date: Date, utcDate: Date, dateStr: string }) => boolean"}</InlineCode>
               </td>
               <td>
                 Custom filter function. The date will be excluded from the
-                result if the callback returns <code>false</code>, otherwise it
+                result if the callback returns <InlineCode>false</InlineCode>, otherwise it
                 will be included.
               </td>
               <td>—</td>
@@ -299,29 +291,29 @@ yarn add recur-date-based@latest`}</code>
             <tr>
               <td>extend</td>
               <td>
-                <code>{`Record<string, (args: { date: Date, utcDate: Date, dateStr: string }) => unknown>`}</code>
+                <InlineCode>{`Record<string, (args: { date: Date, utcDate: Date, dateStr: string }) => unknown>`}</InlineCode>
               </td>
               <td>
                 Extend each occurrence with custom properties. Each key maps to a
-                function that receives <code>date</code>, <code>utcDate</code>,
-                and <code>dateStr</code> of the current iteration. Return values
+                function that receives <InlineCode>date</InlineCode>, <InlineCode>utcDate</InlineCode>,
+                and <InlineCode>dateStr</InlineCode> of the current iteration. Return values
                 become the corresponding keys in the output.
               </td>
               <td>
-                <code>{`{}`}</code>
+                <InlineCode>{`{}`}</InlineCode>
               </td>
             </tr>
             <tr>
               <td>onError</td>
               <td>
-                <code>(error: Error) ={`>`} unknown</code>
+                <InlineCode>{"(error: Error) => unknown"}</InlineCode>
               </td>
               <td>
                 A callback to handle any error occurred during the recurring
                 process.
               </td>
               <td>
-                <code>null</code>
+                <InlineCode>null</InlineCode>
               </td>
             </tr>
           </tbody>
@@ -334,15 +326,11 @@ yarn add recur-date-based@latest`}</code>
         <code>OUTPUT_FORMATS</code>.
       </p>
       <Copyable>
-        <pre>
-          <code className={styles.demoCode}>
-            {`import { formatDate } from 'recur-date-based'
+        <CodeBlock language="typescript">{`import { formatDate } from 'recur-date-based'
 
 formatDate(new Date('2024-03-15'), 'YYYY-MM-DD') // "2024-03-15"
 formatDate(new Date('2024-03-15T09:30:00'), 'YYYY-MM-DD HH:MM') // "2024-03-15 09:30"
-formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 2024"`}
-          </code>
-        </pre>
+formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 2024"`}</CodeBlock>
       </Copyable>
       <h3>Format Tokens</h3>
       <p>
@@ -377,34 +365,24 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
       <h3>Popular Examples</h3>
       <p><b>Step-based, daily:</b></p>
       <Copyable>
-        <pre>
-          <code className={styles.demoCode}>
-            {`genRecurDateBasedList({
+        <CodeBlock language="typescript">{`genRecurDateBasedList({
   start: '2024-01-01',
   end: 5,
   rules: [{ unit: 'day', portion: 1 }],
   outputFormat: 'YYYY-MM-DD',
-})`}
-          </code>
-        </pre>
+})`}</CodeBlock>
       </Copyable>
       <p><b>Cron: weekdays at 9am:</b></p>
       <Copyable>
-        <pre>
-          <code className={styles.demoCode}>
-            {`genRecurDateBasedList({
+        <CodeBlock language="typescript">{`genRecurDateBasedList({
   start: '2024-01-01',
   end: '2024-01-31',
   rules: '0 9 * * 1-5',
-})`}
-          </code>
-        </pre>
+})`}</CodeBlock>
       </Copyable>
       <p><b>With filter and extend:</b></p>
       <Copyable>
-        <pre>
-          <code className={styles.demoCode}>
-            {`genRecurDateBasedList({
+        <CodeBlock language="typescript">{`genRecurDateBasedList({
   start: '2024-01-01',
   end: 10,
   rules: [{ unit: 'day', portion: 1 }],
@@ -413,9 +391,7 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
     dayOfWeek: ({ date }) => date.getDay(),
     iso: ({ dateStr }) => dateStr,
   },
-})`}
-          </code>
-        </pre>
+})`}</CodeBlock>
       </Copyable>
       <a
         target="_blank"
@@ -426,9 +402,7 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
       </a>
       <p>Check out a detailed example with multiple rules.</p>
       <Copyable>
-        <pre>
-          <code className={styles.demoCode}>
-            {`import { genRecurDateBasedList } from 'recur-date-based'
+        <CodeBlock language="typescript">{`import { genRecurDateBasedList } from 'recur-date-based'
 
 genRecurDateBasedList({
   start: '2024-01-01T00:00:00',
@@ -458,9 +432,7 @@ genRecurDateBasedList({
   extend: {
     isMonday: ({ date }) => date.getDay() === 1,
   }
-})`}
-          </code>
-        </pre>
+})`}</CodeBlock>
       </Copyable>
 
       <p>
@@ -470,9 +442,7 @@ genRecurDateBasedList({
       </p>
 
       <Copyable>
-        <pre>
-          <code className={styles.demoCode}>
-            {`[
+        <CodeBlock language="json">{`[
     {
         "dateStr": "1/1/2024, 00:00:00",
         "date": "2024-01-01T00:00:00.000Z",
@@ -491,9 +461,7 @@ genRecurDateBasedList({
         "utcDate": "2024-03-07T04:00:00.000Z",
         "isMonday": false
     }
-]`}
-          </code>
-        </pre>
+]`}</CodeBlock>
       </Copyable>
 
       <p>
@@ -504,9 +472,7 @@ genRecurDateBasedList({
       </p>
 
       <Copyable>
-        <pre>
-          <code className={styles.demoCode}>
-            {`import { genRecurDateBasedList } from 'recur-date-based'
+        <CodeBlock language="typescript">{`import { genRecurDateBasedList } from 'recur-date-based'
 
 genRecurDateBasedList({
   start: new Date(),
@@ -517,9 +483,7 @@ genRecurDateBasedList({
   onError: (error) => {
     console.log(error.message);
   },
-})`}
-          </code>
-        </pre>
+})`}</CodeBlock>
       </Copyable>
 
       <p>
@@ -529,9 +493,7 @@ genRecurDateBasedList({
       </p>
 
       <Copyable>
-        <pre>
-          <code className={styles.demoCode}>
-            {`[
+        <CodeBlock language="json">{`[
     {
         "dateStr": "2024-04-04T18:45:23",
         "date": "2024-04-04T18:45:23.977Z",
@@ -547,9 +509,7 @@ genRecurDateBasedList({
         "date": "2024-04-08T18:45:23.977Z",
         "utcDate": "2024-04-08T15:45:23.977Z"
     }
-]`}
-          </code>
-        </pre>
+]`}</CodeBlock>
       </Copyable>
       <h2 id="roadmap">Roadmap</h2>
       <div> &#10003; Extended props</div>
@@ -558,7 +518,7 @@ genRecurDateBasedList({
       <div> &#10003; Custom error handling</div>
       <div> &#10003; Custom timezone</div>
       <div> &#10003; Repeating to backward</div>
-      <div> &#10003; Short formatting (outputFormat, formatDate, OUTPUT_FORMATS)</div>
+      <div> &#10003; Formatting (e.g. YYYY-MM-DD HH:mm:ss)</div>
       <div> &#10003; Cron rules (5-field expressions)</div>
       <p>
         See the{" "}
@@ -631,6 +591,6 @@ genRecurDateBasedList({
           https://github.com/NavasardianMichael/recur-date-based
         </a>
       </p>
-    </div>
+    </article>
   );
 });

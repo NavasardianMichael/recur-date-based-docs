@@ -8,13 +8,13 @@ type Props = {
 
 export const Header: FC<Props> = () => {
   return (
-    <div className={styles.header}>
-        <div className={styles.logo}>
-            <img src={Logo} alt='logo' />
-        </div>
-        <div className={styles.name}>
-          <h1 style={{margin: 0, textAlign: 'left'}}>Docs of recur-date-based package</h1>
-        </div>
-    </div>
+    <header className={styles.header} role="banner">
+      <div className={styles.logo}>
+        <img src={Logo} alt="recur-date-based logo" />
+      </div>
+      <div className={styles.name}>
+        <h1 style={{ margin: 0, textAlign: 'left' }}>Docs of recur-date-based package</h1>
+      </div>
+    </header>
   )
 }
