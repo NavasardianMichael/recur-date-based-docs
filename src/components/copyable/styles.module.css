@@ -1,6 +1,6 @@
 .copyable {
   border-width: 1px;
-  border-style: solid;
+  border-style: dashed;
   border-radius: 6px;
   border-color: var(--secondary-color);
   max-width: 750px;

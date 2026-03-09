@@ -83,8 +83,10 @@ export const Docs: FC<Props> = memo(() => {
           or opening an issue.
         </p>
       </section>
-      <h2 id="getting-started">Getting Started</h2>
-      <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+
+      <section aria-labelledby="getting-started">
+        <h2 id="getting-started">Getting Started</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
         <Copyable>
           <CodeBlock language="bash">{`npm install recur-date-based@latest`}</CodeBlock>
         </Copyable>
@@ -94,9 +96,12 @@ export const Docs: FC<Props> = memo(() => {
         <Copyable>
           <CodeBlock language="bash">{`yarn add recur-date-based@latest`}</CodeBlock>
         </Copyable>
-      </div>
-      <h2 id="api-reference">API Reference</h2>
-      <h3>Exports</h3>
+        </div>
+      </section>
+
+      <section aria-labelledby="api-reference">
+        <h2 id="api-reference">API Reference</h2>
+        <h3>Exports</h3>
       <div className={styles.typesList}>
         <table className={styles.paramsTable}>
           <thead>
@@ -331,9 +336,12 @@ Cron: 5-field string (minute hour dayOfMonth month dayOfWeek)`}</CodeBlock>
             </tr>
           </tbody>
         </table>
-      </div>
-      <h2 id="usage">Usage & Examples</h2>
-      <h3>formatDate</h3>
+        </div>
+      </section>
+
+      <section aria-labelledby="usage">
+        <h2 id="usage">Usage & Examples</h2>
+        <h3>formatDate</h3>
       <p>
         Formats a <code>Date</code> using a supported format string from{' '}
         <code>OUTPUT_FORMATS</code>.
@@ -349,6 +357,7 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
       <p>
         Use these tokens in <code>outputFormat</code> or with <code>formatDate</code>:
       </p>
+      <div className={`${styles.typesList} ${styles.fitContent}`}>
       <table className={styles.paramsTable}>
         <thead>
           <tr>
@@ -357,24 +366,25 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
           </tr>
         </thead>
         <tbody>
-          <tr><td><code>YYYY</code></td><td>4-digit year</td></tr>
-          <tr><td><code>YY</code></td><td>2-digit year</td></tr>
-          <tr><td><code>MM</code></td><td>2-digit month</td></tr>
-          <tr><td><code>M</code></td><td>Month (no leading zero)</td></tr>
-          <tr><td><code>DD</code></td><td>2-digit day</td></tr>
-          <tr><td><code>D</code></td><td>Day (no leading zero)</td></tr>
-          <tr><td><code>HH</code></td><td>Hour (24h, or 12h if format contains <code> A</code>)</td></tr>
-          <tr><td><code>SS</code></td><td>Seconds</td></tr>
-          <tr><td><code>SSS</code></td><td>Milliseconds</td></tr>
-          <tr><td><code>A</code></td><td>AM/PM</td></tr>
-          <tr><td><code>EEE</code></td><td>Weekday short (locale)</td></tr>
-          <tr><td><code>EEEE</code></td><td>Weekday long (locale)</td></tr>
-          <tr><td><code>MMM</code></td><td>Month short (locale)</td></tr>
-          <tr><td><code>MMMM</code></td><td>Month long (locale)</td></tr>
-          <tr><td><code>DDD</code></td><td>Day of year (3-digit)</td></tr>
-          <tr><td><code>Z</code></td><td>Timezone offset (+HH:mm)</td></tr>
+          <tr><td>YYYY</td><td>4-digit year</td></tr>
+          <tr><td>YY</td><td>2-digit year</td></tr>
+          <tr><td>MM</td><td>2-digit month</td></tr>
+          <tr><td>M</td><td>Month (no leading zero)</td></tr>
+          <tr><td>DD</td><td>2-digit day</td></tr>
+          <tr><td>D</td><td>Day (no leading zero)</td></tr>
+          <tr><td>HH</td><td>Hour (24h, or 12h if format contains <code> A</code>)</td></tr>
+          <tr><td>SS</td><td>Seconds</td></tr>
+          <tr><td>SSS</td><td>Milliseconds</td></tr>
+          <tr><td>A</td><td>AM/PM</td></tr>
+          <tr><td>EEE</td><td>Weekday short (locale)</td></tr>
+          <tr><td>EEEE</td><td>Weekday long (locale)</td></tr>
+          <tr><td>MMM</td><td>Month short (locale)</td></tr>
+          <tr><td>MMMM</td><td>Month long (locale)</td></tr>
+          <tr><td>DDD</td><td>Day of year (3-digit)</td></tr>
+          <tr><td>Z</td><td>Timezone offset (+HH:mm)</td></tr>
         </tbody>
       </table>
+      </div>
       <h3>Popular Examples</h3>
       <p><b>Step-based, daily:</b></p>
       <Copyable>
@@ -524,8 +534,11 @@ genRecurDateBasedList({
     }
 ]`}</CodeBlock>
       </Copyable>
-      <h2 id="roadmap">Roadmap</h2>
-      <div> &#10003; Extended props</div>
+      </section>
+
+      <section aria-labelledby="roadmap">
+        <h2 id="roadmap">Roadmap</h2>
+        <div> &#10003; Extended props</div>
       <div> &#10003; Exclude (filter) functionality</div>
       <div> &#10003; Error handling</div>
       <div> &#10003; Custom error handling</div>
@@ -539,9 +552,12 @@ genRecurDateBasedList({
           open issues
         </a>{" "}
         for a full list of proposed features (and known issues).
-      </p>
-      <h2 id="contributing">Contributing</h2>
-      <p>
+        </p>
+      </section>
+
+      <section aria-labelledby="contributing">
+        <h2 id="contributing">Contributing</h2>
+        <p>
         Contributions are what make the open source community such an amazing
         place to learn, inspire, and create. Any contributions you make are{" "}
         <strong>greatly appreciated</strong>.
@@ -575,9 +591,15 @@ genRecurDateBasedList({
         </li>
         <li>Open a Pull Request</li>
       </ol>
-      <h2 id="license">License</h2>
-      <p>Distributed under the MIT License</p>
-      <h2 id="contact" style={{ marginBottom: 4, marginTop: 4 }}>Contact</h2>
+      </section>
+
+      <section aria-labelledby="license">
+        <h2 id="license">License</h2>
+        <p>Distributed under the MIT License</p>
+      </section>
+
+      <section aria-labelledby="contact">
+        <h2 id="contact" style={{ marginBottom: 4, marginTop: 4 }}>Contact</h2>
       <p style={{ marginBottom: 4, marginTop: 4 }}>
         Email -{" "}
         <a
@@ -604,6 +626,7 @@ genRecurDateBasedList({
           https://github.com/NavasardianMichael/recur-date-based
         </a>
       </p>
+      </section>
     </article>
   );
 });

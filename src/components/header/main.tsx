@@ -1,19 +1,20 @@
 import { FC } from 'react'
-import Logo from 'assets/images/logo.png'
+import Logo from 'assets/images/logo-with-text.png'
 import styles from './styles.module.css'
 
-type Props = {
-
-}
+type Props = {}
 
 export const Header: FC<Props> = () => {
   return (
-    <header className={styles.header} role="banner">
+    <header className={styles.header} role='banner'>
       <div className={styles.logo}>
-        <img src={Logo} alt="recur-date-based logo" />
+        <img src={Logo} alt='recur-date-based logo' />
       </div>
       <div className={styles.name}>
-        <h1 style={{ margin: 0, textAlign: 'left' }}>Docs of recur-date-based package</h1>
+        <h1 style={{ margin: 0, textAlign: 'left' }}>
+          Documentation &amp; API of <br />
+          NPM package recur-date-based
+        </h1>
       </div>
     </header>
   )
