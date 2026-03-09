@@ -7,25 +7,18 @@ Extended documentation site for the [recur-date-based](https://github.com/Navasa
 ### Prerequisites
 
 - Node.js 18+
+- pnpm (this project uses pnpm only)
 
 ### Install
 
 ```bash
-# npm
-npm install
-
-# pnpm
 pnpm install
-
-# yarn
-yarn install
 ```
 
 ### Development
 
 ```bash
-npm start
-# or: pnpm start | yarn start
+pnpm start
 ```
 
 Runs the app at [http://localhost:3000](http://localhost:3000).
@@ -33,26 +26,24 @@ Runs the app at [http://localhost:3000](http://localhost:3000).
 ### Build
 
 ```bash
-npm run build
-# or: pnpm run build | yarn build
+pnpm run build
 ```
 
 ### Deploy
 
 ```bash
-npm run deploy
-# or: pnpm run deploy | yarn deploy
+pnpm run deploy
 ```
 
 Deploys to GitHub Pages (configured via `homepage` in `package.json`).
 
 ## Scripts
 
-| Command                                              | Description              |
-| ---------------------------------------------------- | ------------------------ |
-| `npm start` / `pnpm start` / `yarn start`            | Start development server |
-| `npm run build` / `pnpm run build` / `yarn build`    | Build for production     |
-| `npm run deploy` / `pnpm run deploy` / `yarn deploy` | Deploy to GitHub Pages   |
+| Command              | Description              |
+| -------------------- | ------------------------ |
+| `pnpm start`         | Start development server |
+| `pnpm run build`     | Build for production     |
+| `pnpm run deploy`     | Deploy to GitHub Pages   |
 
 ## License
 
