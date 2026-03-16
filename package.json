@@ -5,13 +5,13 @@
   "private": true,
   "packageManager": "pnpm@10.9.0",
   "dependencies": {
-    "@types/node": "^20.17.10",
-    "@types/react": "^18.3.12",
-    "@types/react-dom": "^18.3.1",
+    "@types/node": "^20.19.37",
+    "@types/react": "^18.3.28",
+    "@types/react-dom": "^18.3.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-scripts": "5.0.1",
-    "react-syntax-highlighter": "^15.6.1",
+    "react-syntax-highlighter": "^15.6.6",
     "typescript": "^4.9.5",
     "web-vitals": "^4.2.4"
   },
@@ -42,7 +42,7 @@
   },
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
-    "gh-pages": "^6.0.0",
+    "gh-pages": "^6.3.0",
     "png-to-ico": "^3.0.1",
     "sharp": "^0.34.5"
   }

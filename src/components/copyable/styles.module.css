@@ -22,6 +22,7 @@
   .installBlock {
     box-sizing: border-box;
     display: flex;
+    align-items: flex-start;
     overflow-x: auto;
 
     &.disabled {
