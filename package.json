@@ -21,7 +21,7 @@
     "generate-branding": "node scripts/generate-branding-images.js",
     "eject": "react-scripts eject",
     "predeploy": "pnpm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "node -e \"require('fs').copyFileSync('public/gh-pages-redirect.html', 'build/index.html')\" && gh-pages -d build"
   },
   "eslintConfig": {
     "extends": [
