@@ -44,6 +44,23 @@ export const Docs: FC<Props> = memo(() => {
       <section aria-labelledby='about-the-project'>
         <h2 id='about-the-project'>About The Project</h2>
         <p>
+          <b>At a glance</b>: <InlineCode>recur-date-based</InlineCode>{' '}
+          generates recurring dates (step-based or cron) and lets you attach
+          strongly-typed extra properties to each occurrence.
+        </p>
+        <Copyable>
+          <CodeBlock language='typescript'>{`import { genRecurDateBasedList } from 'recur-date-based'
+
+genRecurDateBasedList({
+  start: '2024-01-01',
+  end: 5,
+  rules: [{ unit: 'day', portion: 1 }],
+  extend: {
+    isWeekend: ({ date }) => [0, 6].includes(date.getDay()),
+  },
+})`}</CodeBlock>
+        </Copyable>
+        <p>
           The project provides a unique functionality related to JavaScript
           dates. It allows to generate recurring dates based on a certain input
           shape. Its name is in harmony with its essence: the exported function
@@ -119,6 +136,8 @@ export const Docs: FC<Props> = memo(() => {
         <p>
           This package exposes <b>functions</b>, <b>constants</b> and{' '}
           <b>TypeScript types</b> that you can import individually as needed.
+          Exported functions and other utilities are documented with{' '}
+          <b>JSDoc</b> in the source for inline editor hints and better DX.
         </p>
         <div className={styles.typesList}>
           <table className={styles.paramsTable}>
@@ -133,9 +152,14 @@ export const Docs: FC<Props> = memo(() => {
               <tr>
                 <td>genRecurDateBasedList</td>
                 <td>
-                  <CodeBlock language='typescript'>{`(args?) => T_CoreReturnType[]`}</CodeBlock>
+                  <CodeBlock language='typescript'>{`<T extends object = {}>(args?: T_CoreInitialArgs & { extend?: Record<string, (args: { date: Date; utcDate: Date; dateStr: string }) => unknown> }) => T_CoreReturnType<T>[]`}</CodeBlock>
                 </td>
-                <td>Main function to generate recurring dates</td>
+                <td>
+                  Main function to generate recurring dates. When{' '}
+                  <InlineCode>extend</InlineCode> is provided,{' '}
+                  <InlineCode>T</InlineCode> is inferred from your extension
+                  schema so the return type is fully typed.
+                </td>
               </tr>
               <tr>
                 <td>formatDate</td>
@@ -153,17 +177,13 @@ export const Docs: FC<Props> = memo(() => {
           <table className={styles.paramsTable}>
             <thead>
               <tr>
-                <th>Constant</th>
-                <th>Type</th>
+                <th style={{ width: '30%', whiteSpace: 'nowrap' }}>Constant</th>
                 <th>Description</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>OUTPUT_FORMATS</td>
-                <td>
-                  <CodeBlock language='typescript'>{`readonly T_OutputFormat[]`}</CodeBlock>
-                </td>
+                <td style={{ width: '30%', whiteSpace: 'nowrap' }}>OUTPUT_FORMATS</td>
                 <td>
                   <details>
                     <summary>
@@ -171,6 +191,9 @@ export const Docs: FC<Props> = memo(() => {
                       strings (expand to see all)
                     </summary>
                     <ul>
+                      <li>
+                        <b>1. Date-only: US slash (MM/DD)</b>
+                      </li>
                       <li>
                         <InlineCode>MM/DD/YYYY</InlineCode>
                       </li>
@@ -182,6 +205,9 @@ export const Docs: FC<Props> = memo(() => {
                       </li>
                       <li>
                         <InlineCode>M/D/YYYY</InlineCode>
+                      </li>
+                      <li>
+                        <b>2. Date-only: EU slash (DD/MM)</b>
                       </li>
                       <li>
                         <InlineCode>DD/MM/YYYY</InlineCode>
@@ -196,6 +222,9 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>D/M/YYYY</InlineCode>
                       </li>
                       <li>
+                        <b>3. Date-only: ISO dash (YYYY-MM-DD)</b>
+                      </li>
+                      <li>
                         <InlineCode>YYYY-MM-DD</InlineCode>
                       </li>
                       <li>
@@ -203,6 +232,9 @@ export const Docs: FC<Props> = memo(() => {
                       </li>
                       <li>
                         <InlineCode>YYYY-MM</InlineCode>
+                      </li>
+                      <li>
+                        <b>4. Date-only: EU/US dash</b>
                       </li>
                       <li>
                         <InlineCode>DD-MM-YYYY</InlineCode>
@@ -223,10 +255,16 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>M-D-YYYY</InlineCode>
                       </li>
                       <li>
+                        <b>5. Date-only: YYYY slash</b>
+                      </li>
+                      <li>
                         <InlineCode>YYYY/MM/DD</InlineCode>
                       </li>
                       <li>
                         <InlineCode>YYYY/MM/D</InlineCode>
+                      </li>
+                      <li>
+                        <b>6. Date-only: text month (MMM / MMMM)</b>
                       </li>
                       <li>
                         <InlineCode>MMM DD, YYYY</InlineCode>
@@ -247,6 +285,9 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>MMM YYYY</InlineCode>
                       </li>
                       <li>
+                        <b>7. Date-only: weekday + date</b>
+                      </li>
+                      <li>
                         <InlineCode>EEEE, MMMM DD, YYYY</InlineCode>
                       </li>
                       <li>
@@ -257,6 +298,9 @@ export const Docs: FC<Props> = memo(() => {
                       </li>
                       <li>
                         <InlineCode>EEEE, D MMM YYYY</InlineCode>
+                      </li>
+                      <li>
+                        <b>8. Date-only: day-month-year text</b>
                       </li>
                       <li>
                         <InlineCode>DD MMM YYYY</InlineCode>
@@ -271,10 +315,145 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>D MMMM YYYY</InlineCode>
                       </li>
                       <li>
+                        <b>9. Date+time: DD/D MMM YYYY</b>
+                      </li>
+                      <li>
+                        <InlineCode>DD MMM YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D MMM YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
                         <InlineCode>DD MMM YYYY HH:MM:SS</InlineCode>
                       </li>
                       <li>
                         <InlineCode>D MMM YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD MMM YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D MMM YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD MMM YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D MMM YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <b>10. Date+time: DD/D MMMM YYYY</b>
+                      </li>
+                      <li>
+                        <InlineCode>DD MMMM YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D MMMM YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD MMMM YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D MMMM YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD MMMM YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D MMMM YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD MMMM YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D MMMM YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <b>11. Date+time: MMMM DD/D, YYYY</b>
+                      </li>
+                      <li>
+                        <InlineCode>MMMM DD, YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MMMM D, YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MMMM DD, YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MMMM D, YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MMMM DD, YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MMMM D, YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MMMM DD, YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MMMM D, YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <b>12. Date+time: EEEE long weekday</b>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, MMMM DD, YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, MMMM DD, YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, MMMM DD, YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, MMMM DD, YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, MMMM D, YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, MMMM D, YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, MMMM D, YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, MMMM D, YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, DD MMM YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, DD MMM YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, DD MMM YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, DD MMM YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, D MMM YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, D MMM YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, D MMM YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEEE, D MMM YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <b>13. Date+time: EEE short weekday</b>
+                      </li>
+                      <li>
+                        <InlineCode>EEE, DD MMM YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>EEE, D MMM YYYY HH:MM</InlineCode>
                       </li>
                       <li>
                         <InlineCode>EEE, DD MMM YYYY HH:MM:SS</InlineCode>
@@ -289,12 +468,6 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>EEE, D MMM YYYY HH:MM:SS A</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>EEE, DD MMM YYYY HH:MM</InlineCode>
-                      </li>
-                      <li>
-                        <InlineCode>EEE, D MMM YYYY HH:MM</InlineCode>
-                      </li>
-                      <li>
                         <InlineCode>EEE, DD MMM YYYY HH:MM:SS.SSS</InlineCode>
                       </li>
                       <li>
@@ -305,6 +478,9 @@ export const Docs: FC<Props> = memo(() => {
                       </li>
                       <li>
                         <InlineCode>EEE, D MMM YYYY HH:MM:SS.SSS A</InlineCode>
+                      </li>
+                      <li>
+                        <b>14. Date-only: 2-digit year</b>
                       </li>
                       <li>
                         <InlineCode>YY/MM/DD</InlineCode>
@@ -319,10 +495,28 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>YY-MM-D</InlineCode>
                       </li>
                       <li>
+                        <InlineCode>MM/DD/YY</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/D/YY</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD/MM/YY</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D/M/YY</InlineCode>
+                      </li>
+                      <li>
+                        <b>15. Date-only: compact</b>
+                      </li>
+                      <li>
                         <InlineCode>YYYYMMDD</InlineCode>
                       </li>
                       <li>
                         <InlineCode>YYYYDDD</InlineCode>
+                      </li>
+                      <li>
+                        <b>16. Date-only: dot</b>
                       </li>
                       <li>
                         <InlineCode>DD.MM.YYYY</InlineCode>
@@ -337,6 +531,18 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>D.MM.YY</InlineCode>
                       </li>
                       <li>
+                        <InlineCode>YYYY.MM.DD</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY.MM.D</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D.M.YYYY</InlineCode>
+                      </li>
+                      <li>
+                        <b>17. Date+time: dot</b>
+                      </li>
+                      <li>
                         <InlineCode>DD.MM.YYYY HH:MM</InlineCode>
                       </li>
                       <li>
@@ -349,31 +555,37 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>D.MM.YYYY HH:MM:SS</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>YYYY.MM.DD</InlineCode>
+                        <InlineCode>DD.MM.YY HH:MM</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>YYYY.MM.D</InlineCode>
+                        <InlineCode>D.MM.YY HH:MM</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>D.M.YYYY</InlineCode>
+                        <InlineCode>DD.MM.YY HH:MM:SS</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>MM/DD/YY</InlineCode>
+                        <InlineCode>D.MM.YY HH:MM:SS</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>M/D/YY</InlineCode>
-                      </li>
-                      <li>
-                        <InlineCode>DD/MM/YY</InlineCode>
-                      </li>
-                      <li>
-                        <InlineCode>D/M/YY</InlineCode>
+                        <InlineCode>YYYY.MM.DD HH:MM</InlineCode>
                       </li>
                       <li>
                         <InlineCode>YYYY.MM.DD HH:MM:SS</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>YYYY.MM.DD HH:MM</InlineCode>
+                        <InlineCode>YYYY.MM.D HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY.MM.D HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D.M.YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D.M.YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <b>18. Time only</b>
                       </li>
                       <li>
                         <InlineCode>HH:MM</InlineCode>
@@ -400,6 +612,9 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>HH:MM:SS.SSS</InlineCode>
                       </li>
                       <li>
+                        <b>19. Date+time: ISO (YYYY-MM-DD)</b>
+                      </li>
+                      <li>
                         <InlineCode>YYYY-MM-DDTHH:MM</InlineCode>
                       </li>
                       <li>
@@ -412,13 +627,31 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>YYYY-MM-DDTHH:MM:SS.SSS</InlineCode>
                       </li>
                       <li>
+                        <InlineCode>YYYY-MM-DDTHH:MM:SSZ</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY-MM-DDTHH:MM:SS.SSSZ</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY-MM-DD HH:MM</InlineCode>
+                      </li>
+                      <li>
                         <InlineCode>YYYY-MM-DD HH:MM:SS</InlineCode>
                       </li>
                       <li>
                         <InlineCode>YYYY-MM-DD HH:MM:SS.SSS</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>YYYY-MM-DD HH:MM</InlineCode>
+                        <InlineCode>YYYY-MM-DD HH:MM:SS Z</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY-MM-D HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY-MM-D HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <b>20. Date+time: US slash (MM/DD)</b>
                       </li>
                       <li>
                         <InlineCode>MM/DD/YYYY HH:MM</InlineCode>
@@ -437,6 +670,39 @@ export const Docs: FC<Props> = memo(() => {
                       </li>
                       <li>
                         <InlineCode>MM/D/YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MM/DD/YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MM/D/YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/DD/YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/DD/YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/DD/YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/DD/YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/D/YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/D/YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/D/YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/D/YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <b>21. Date+time: EU slash (DD/MM)</b>
                       </li>
                       <li>
                         <InlineCode>DD/MM/YYYY HH:MM</InlineCode>
@@ -469,6 +735,33 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>DD/MM/YYYY HH:MM:SS.SSS A</InlineCode>
                       </li>
                       <li>
+                        <InlineCode>DD/M/YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD/M/YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD/M/YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD/M/YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D/M/YYYY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D/M/YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D/M/YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D/M/YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <b>22. Date+time: EU/US dash</b>
+                      </li>
+                      <li>
                         <InlineCode>DD-MM-YYYY HH:MM</InlineCode>
                       </li>
                       <li>
@@ -479,6 +772,18 @@ export const Docs: FC<Props> = memo(() => {
                       </li>
                       <li>
                         <InlineCode>D-MM-YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD-MM-YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D-MM-YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD-MM-YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D-MM-YYYY HH:MM:SS A</InlineCode>
                       </li>
                       <li>
                         <InlineCode>MM-DD-YYYY HH:MM</InlineCode>
@@ -503,6 +808,48 @@ export const Docs: FC<Props> = memo(() => {
                       </li>
                       <li>
                         <InlineCode>M-D-YYYY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MM-DD-YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M-DD-YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MM-D-YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M-D-YYYY HH:MM A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MM-DD-YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M-DD-YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MM-D-YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M-D-YYYY HH:MM:SS A</InlineCode>
+                      </li>
+                      <li>
+                        <b>23. Date+time: YYYY slash</b>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY/MM/DD HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY/MM/DD HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY/MM/D HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YYYY/MM/D HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <b>24. Date+time: MMM DD, YYYY</b>
                       </li>
                       <li>
                         <InlineCode>MMM DD, YYYY HH:MM</InlineCode>
@@ -541,39 +888,79 @@ export const Docs: FC<Props> = memo(() => {
                         <InlineCode>MMM D, YYYY HH:MM:SS.SSS A</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>YYYY-MM-DDTHH:MM:SSZ</InlineCode>
+                        <b>25. Date+time: 2-digit year</b>
                       </li>
                       <li>
-                        <InlineCode>YYYY-MM-DDTHH:MM:SS.SSSZ</InlineCode>
+                        <InlineCode>YY/MM/DD HH:MM</InlineCode>
                       </li>
                       <li>
-                        <InlineCode>YYYY-MM-DD HH:MM:SS Z</InlineCode>
+                        <InlineCode>YY/MM/DD HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YY/MM/D HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YY/MM/D HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YY-MM-DD HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YY-MM-DD HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YY-MM-D HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>YY-MM-D HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MM/DD/YY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>MM/DD/YY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/D/YY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>M/D/YY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD/MM/YY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>DD/MM/YY HH:MM:SS</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D/M/YY HH:MM</InlineCode>
+                      </li>
+                      <li>
+                        <InlineCode>D/M/YY HH:MM:SS</InlineCode>
                       </li>
                     </ul>
                   </details>
                 </td>
               </tr>
               <tr>
-                <td>DIRECTIONS</td>
+                <td style={{ width: '30%', whiteSpace: 'nowrap' }}>DIRECTIONS</td>
                 <td>
-                  <CodeBlock language='typescript'>{`{ forward, backward }`}</CodeBlock>
-                </td>
-                <td>
-                  Direction constants:{' '}
+                  Readonly map of supported recurrence directions:{' '}
                   <InlineCode>DIRECTIONS.forward</InlineCode> and{' '}
                   <InlineCode>DIRECTIONS.backward</InlineCode>.
                 </td>
               </tr>
               <tr>
-                <td>INTERVAL_UNITS</td>
+                <td style={{ width: '30%', whiteSpace: 'nowrap' }}>INTERVAL_UNITS</td>
                 <td>
-                  <CodeBlock language='typescript'>{`{ millisecond, minute, hour, day, week, month, year }`}</CodeBlock>
-                </td>
-                <td>
-                  Interval unit constants like{' '}
+                  Readonly map of supported interval units for step-based rules:{' '}
+                  <InlineCode>INTERVAL_UNITS.millisecond</InlineCode>,{' '}
+                  <InlineCode>INTERVAL_UNITS.minute</InlineCode>,{' '}
+                  <InlineCode>INTERVAL_UNITS.hour</InlineCode>,{' '}
                   <InlineCode>INTERVAL_UNITS.day</InlineCode>,{' '}
                   <InlineCode>INTERVAL_UNITS.week</InlineCode>,{' '}
-                  <InlineCode>INTERVAL_UNITS.month</InlineCode>, etc.
+                  <InlineCode>INTERVAL_UNITS.month</InlineCode>,{' '}
+                  <InlineCode>INTERVAL_UNITS.year</InlineCode>.
                 </td>
               </tr>
             </tbody>
@@ -611,7 +998,9 @@ export const Docs: FC<Props> = memo(() => {
                 </td>
                 <td>
                   Input parameters type for{' '}
-                  <InlineCode>genRecurDateBasedList</InlineCode>
+                  <InlineCode>genRecurDateBasedList</InlineCode>. Mirrors the
+                  configuration object documented in the parameters table and is
+                  useful for annotating reusable args objects.
                 </td>
               </tr>
               <tr>
@@ -620,7 +1009,8 @@ export const Docs: FC<Props> = memo(() => {
                 </td>
                 <td>
                   Mapped union type of all entries in{' '}
-                  <InlineCode>OUTPUT_FORMATS</InlineCode>
+                  <InlineCode>OUTPUT_FORMATS</InlineCode>. Helpful when you want
+                  to restrict your own APIs to supported format strings.
                 </td>
               </tr>
               <tr>
@@ -629,7 +1019,8 @@ export const Docs: FC<Props> = memo(() => {
                 </td>
                 <td>
                   Mapped union type of all entries in{' '}
-                  <InlineCode>INTERVAL_UNITS</InlineCode>
+                  <InlineCode>INTERVAL_UNITS</InlineCode>. Use it to avoid
+                  stringly-typed interval units in your own types.
                 </td>
               </tr>
               <tr>
@@ -694,12 +1085,15 @@ Step-based: Array<{ unit: 'millisecond' | 'minute' | 'hour' | 'day' | 'week' | '
 Cron: 5-field string (minute hour dayOfMonth month dayOfWeek)`}</CodeBlock>
                 </td>
                 <td>
-                  Step-based rules or cron expression. Cron format:{' '}
+                  Step-based rules or cron expression. For arrays, each rule is
+                  applied in sequence from the previous occurrence (e.g. month
+                  then day then hour). For cron, use a 5-field expression{' '}
                   <InlineCode>
                     minute hour dayOfMonth month dayOfWeek
                   </InlineCode>{' '}
                   (e.g. <InlineCode>0 9 * * 1-5</InlineCode> for weekdays at
-                  9am).
+                  9am); with cron, <InlineCode>end</InlineCode> can be either a
+                  max occurrence count or a limiting date.
                 </td>
                 <td style={{ minWidth: 122 }}>
                   <CodeBlock language='typescript'>{`[{
@@ -729,9 +1123,11 @@ Cron: 5-field string (minute hour dayOfMonth month dayOfWeek)`}</CodeBlock>
                   <InlineCode>number</InlineCode>
                 </td>
                 <td>
-                  A numeric representation of the timezone, based on which the
-                  output will be formatted. Take into account that the provided
-                  value must in a specific range (-12 to 12).
+                  A numeric representation of the timezone (-12 to 12) that
+                  controls the wall-clock <InlineCode>date</InlineCode> and{' '}
+                  <InlineCode>dateStr</InlineCode>. Use{' '}
+                  <InlineCode>0</InlineCode> for UTC. When omitted, the current
+                  machine timezone is used.
                 </td>
                 <td>user's timezone</td>
               </tr>
@@ -807,9 +1203,10 @@ Cron: 5-field string (minute hour dayOfMonth month dayOfWeek)`}</CodeBlock>
                   </InlineCode>
                 </td>
                 <td>
-                  Custom filter function. The date will be excluded from the
-                  result if the callback returns <InlineCode>false</InlineCode>,
-                  otherwise it will be included.
+                  Custom filter function. If the callback returns{' '}
+                  <InlineCode>false</InlineCode>, the occurrence is skipped;
+                  otherwise it is included. Runs per generated occurrence before
+                  it is added to the final array.
                 </td>
                 <td>—</td>
               </tr>
@@ -823,7 +1220,9 @@ Cron: 5-field string (minute hour dayOfMonth month dayOfWeek)`}</CodeBlock>
                   to a function that receives <InlineCode>date</InlineCode>,{' '}
                   <InlineCode>utcDate</InlineCode>, and{' '}
                   <InlineCode>dateStr</InlineCode> of the current iteration.
-                  Return values become the corresponding keys in the output.
+                  Return values become the corresponding keys in the output, and
+                  TypeScript infers these keys into{' '}
+                  <InlineCode>T_CoreReturnType&lt;T&gt;</InlineCode>.
                 </td>
                 <td>
                   <InlineCode>{`{}`}</InlineCode>
@@ -835,8 +1234,10 @@ Cron: 5-field string (minute hour dayOfMonth month dayOfWeek)`}</CodeBlock>
                   <InlineCode>{'(error: Error) => unknown'}</InlineCode>
                 </td>
                 <td>
-                  A callback to handle any error occurred during the recurring
-                  process.
+                  Optional error handler for validation or runtime errors during
+                  the recurring process. When provided, errors are passed here
+                  instead of being thrown; when omitted, invalid configuration
+                  causes an exception.
                 </td>
                 <td>
                   <InlineCode>null</InlineCode>
@@ -849,6 +1250,12 @@ Cron: 5-field string (minute hour dayOfMonth month dayOfWeek)`}</CodeBlock>
 
       <section aria-labelledby='usage'>
         <h2 id='usage'>Usage & Examples</h2>
+        <p>
+          The examples below cover the most common flows: step-based rules, cron
+          expressions, TypeScript usage with exported constants and types,
+          extending occurrences with extra props, and timezone-aware
+          backfilling.
+        </p>
         <h3>formatDate</h3>
         <p>
           Formats a <code>Date</code> using a supported format string from{' '}
@@ -951,20 +1358,62 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
         <Copyable>
           <CodeBlock language='typescript'>{`genRecurDateBasedList({
   start: '2024-01-01',
-  end: 5,
+  end: 2,
   rules: [{ unit: 'day', portion: 1 }],
   outputFormat: 'YYYY-MM-DD',
+  numericTimeZone: 4,
 })`}</CodeBlock>
         </Copyable>
+        <p>Result:</p>
+        <Copyable>
+          <CodeBlock language='json'>{`[
+  {
+    "dateStr": "Mon, 1 Jan 2024 04:00:00",
+    "date": "2024-01-01T04:00:00.000Z",
+    "utcDate": "2024-01-01T00:00:00.000Z"
+  },
+  {
+    "dateStr": "Tue, 2 Jan 2024 04:00:00",
+    "date": "2024-01-02T04:00:00.000Z",
+    "utcDate": "2024-01-02T00:00:00.000Z"
+  }
+]`}</CodeBlock>
+        </Copyable>
         <p>
-          <b>Cron: weekdays at 9am:</b>
+          <b>Cron: Every Monday, Wednesday and Friday at 9am:</b>
         </p>
         <Copyable>
           <CodeBlock language='typescript'>{`genRecurDateBasedList({
-  start: '2024-01-01',
-  end: '2024-01-31',
-  rules: '0 9 * * 1-5',
+  start: '2024-01-03',
+  end: '2024-01-11',
+  rules: '0 9 * * 1-3',
+  outputFormat: 'EEEE, D MMM YYYY HH:MM:SS',
 })`}</CodeBlock>
+        </Copyable>
+        <p>Result:</p>
+        <Copyable>
+          <CodeBlock language='json'>{`[
+  {
+    "dateStr": "Wednesday, 3 Jan 2024 09:00:00",
+    "date": "2024-01-03T09:00:00.000Z",
+    "utcDate": "2024-01-03T05:00:00.000Z"
+  },
+  {
+    "dateStr": "Monday, 8 Jan 2024 09:00:00",
+    "date": "2024-01-08T09:00:00.000Z",
+    "utcDate": "2024-01-08T05:00:00.000Z"
+  },
+  {
+    "dateStr": "Tuesday, 9 Jan 2024 09:00:00",
+    "date": "2024-01-09T09:00:00.000Z",
+    "utcDate": "2024-01-09T05:00:00.000Z"
+  },
+  {
+    "dateStr": "Wednesday, 10 Jan 2024 09:00:00",
+    "date": "2024-01-10T09:00:00.000Z",
+    "utcDate": "2024-01-10T05:00:00.000Z"
+  }
+]`}</CodeBlock>
         </Copyable>
         <p>
           <b>Using exported constants (TypeScript):</b>
@@ -995,6 +1444,29 @@ genRecurDateBasedList(args)`}</CodeBlock>
   end: 10,
   rules: [{ unit: 'day', portion: 1 }],
   filter: ({ date }) => date.getDay() !== 0,
+  extend: {
+    dayOfWeek: ({ date }) => date.getDay(),
+    isLeapYear: ({ date }) => {
+      const y = date.getFullYear();
+      return (y % 4 === 0 && y % 100 !== 0) || y % 400 === 0;
+    },
+  },
+})`}</CodeBlock>
+        </Copyable>
+        <p>
+          You can also spell out the generic explicitly so that the returned
+          list has a precise item type: the base shape{' '}
+          <InlineCode>{`{ date: Date; utcDate: Date; dateStr: string }`}</InlineCode>{' '}
+          intersected with the type you provide in the generic argument.
+        </p>
+        <Copyable>
+          <CodeBlock language='typescript'>{`const list = genRecurDateBasedList<{
+  dayOfWeek: number
+  isLeapYear: boolean
+}>({
+  start: '2024-01-01',
+  end: 10,
+  rules: [{ unit: 'day', portion: 1 }],
   extend: {
     dayOfWeek: ({ date }) => date.getDay(),
     isLeapYear: ({ date }) => {
@@ -1101,11 +1573,7 @@ genRecurDateBasedList({
 })`}</CodeBlock>
         </Copyable>
 
-        <p>
-          Check out the result. Pay attention to the the `dateStr` format. In
-          case of missing `localeString` property, the date will be formatted to{' '}
-          <b>yyyy-mm-ddThh:mm:ss</b> .
-        </p>
+        <p>Check out the result.</p>
 
         <Copyable>
           <CodeBlock language='json'>{`[
@@ -1128,6 +1596,38 @@ genRecurDateBasedList({
         </Copyable>
       </section>
 
+      <section aria-labelledby='gotchas'>
+        <h2 id='gotchas'>Gotchas & Notes</h2>
+        <ul>
+          <li>
+            <b>Timezones and DST</b>: <InlineCode>date</InlineCode> and{' '}
+            <InlineCode>dateStr</InlineCode> represent the wall-clock time in
+            the target timezone (default: machine timezone, or{' '}
+            <InlineCode>numericTimeZone</InlineCode> when set).{' '}
+            <InlineCode>utcDate</InlineCode> is the corresponding UTC moment.
+          </li>
+          <li>
+            <b>timeZone vs numericTimeZone</b>: Avoid defining{' '}
+            <InlineCode>timeZone</InlineCode> inside{' '}
+            <InlineCode>localeString.formatOptions</InlineCode> when you also
+            use <InlineCode>numericTimeZone</InlineCode>, otherwise results may
+            be inconsistent.
+          </li>
+          <li>
+            <b>Error handling</b>: If <InlineCode>onError</InlineCode> is
+            provided, configuration and runtime errors are routed there and do
+            not throw. If it is omitted, invalid input (e.g. bad cron or{' '}
+            <InlineCode>end</InlineCode>) will throw.
+          </li>
+          <li>
+            <b>Large ranges</b>: When using a very large numeric{' '}
+            <InlineCode>end</InlineCode> together with heavy{' '}
+            <InlineCode>extend</InlineCode> callbacks, be mindful of
+            performance—it iterates once per occurrence.
+          </li>
+        </ul>
+      </section>
+
       <section aria-labelledby='roadmap'>
         <h2 id='roadmap'>Roadmap</h2>
         <div> &#10003; Extended props</div>
@@ -1143,6 +1643,7 @@ genRecurDateBasedList({
           &#10003; Proper timezone handling (wall-clock date, correct utcDate)
         </div>
         <div> &#10003; Exported utility constants and types</div>
+        <div> &#10003; JSDoc documentation</div>
         <p>
           See the{' '}
           <a href='https://github.com/NavasardianMichael/recur-date-based/issues'>
