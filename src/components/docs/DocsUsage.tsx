@@ -235,15 +235,7 @@ genRecurDateBasedList(args)`}</CodeBlock>
   },
 })`}</CodeBlock>
         </Copyable>
-        {/* Codesandbox link commented out for a while
-        <a
-          target='_blank'
-          href='https://codesandbox.io/p/sandbox/react-typescript-forked-5qmyxf?file=%2Fsrc%2FApp.tsx%3A5%2C23'
-          rel='noreferrer'
-        >
-          Check out the playground in Codesandbox!
-        </a>
-        */}
+        {/* Sandbox block commented out for now */}
         <p>Check out a detailed example with multiple rules.</p>
         <Copyable>
           <CodeBlock language='typescript'>{`import { genRecurDateBasedList } from 'recur-date-based'

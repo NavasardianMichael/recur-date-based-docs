@@ -11,6 +11,15 @@ export const DocsAbout: FC = memo(() => (
       generates recurring dates (step-based or cron) and lets you attach
       strongly-typed extra properties to each occurrence.
     </p>
+    <p>
+      <a
+        target='_blank'
+        rel='noreferrer'
+        href='https://codesandbox.io/p/sandbox/react-typescript-forked-9fps7r?file=%2Fsrc%2FApp.tsx'
+      >
+        Open the playground in Codesandbox
+      </a>
+    </p>
     <Copyable>
       <CodeBlock language='typescript'>{`import { genRecurDateBasedList } from 'recur-date-based'
 
