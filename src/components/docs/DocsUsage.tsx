@@ -1,4 +1,4 @@
-﻿import { FC, memo } from 'react'
+import { FC, memo } from 'react'
 import { Copyable } from 'components/copyable/main'
 import { CodeBlock } from 'components/code-block/CodeBlock'
 import { InlineCode } from 'components/code-block/InlineCode'
@@ -16,8 +16,8 @@ export const DocsUsage: FC = memo(function DocsUsage() {
         </p>
         <h3>formatDate</h3>
         <p>
-          Formats a <code>Date</code> using a supported format string from{' '}
-          <code>OUTPUT_FORMATS</code>.
+          Formats a <InlineCode>Date</InlineCode> using a supported format
+          string from <InlineCode>OUTPUT_FORMATS</InlineCode>.
         </p>
         <Copyable>
           <CodeBlock language='typescript'>{`import { formatDate } from 'recur-date-based'
@@ -28,8 +28,8 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
         </Copyable>
         <h3>Format Tokens</h3>
         <p>
-          Use these tokens in <code>outputFormat</code> or with{' '}
-          <code>formatDate</code>:
+          Use these tokens in <InlineCode>outputFormat</InlineCode> or with{' '}
+          <InlineCode>formatDate</InlineCode>:
         </p>
         <div className={`${styles.typesList} ${styles.fitContent}`}>
           <table className={styles.paramsTable}>
@@ -67,7 +67,7 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
               <tr>
                 <td>HH</td>
                 <td>
-                  Hour (24h, or 12h if format contains <code> A</code>)
+                  Hour (24h, or 12h if format contains <InlineCode> A</InlineCode>)
                 </td>
               </tr>
               <tr>
@@ -282,7 +282,7 @@ genRecurDateBasedList({
         <h3>Result Shape</h3>
         <p>
           Each result item contains three date representations, plus any keys
-          from <code>extend</code>:
+          from <InlineCode>extend</InlineCode>:
         </p>
         <div className={`${styles.typesList} ${styles.fitContent}`}>
           <table className={styles.paramsTable}>
@@ -295,35 +295,51 @@ genRecurDateBasedList({
             </thead>
             <tbody>
               <tr>
-                <td><code>dateStr</code></td>
-                <td><code>string</code></td>
+                <td>
+                  <InlineCode>dateStr</InlineCode>
+                </td>
+                <td>
+                  <InlineCode>string</InlineCode>
+                </td>
                 <td>
                   The wall-clock date/time as a formatted string. Controlled by{' '}
-                  <code>outputFormat</code> or <code>localeString</code>.
+                  <InlineCode>outputFormat</InlineCode> or{' '}
+                  <InlineCode>localeString</InlineCode>.
                 </td>
               </tr>
               <tr>
-                <td><code>date</code></td>
-                <td><code>Date</code></td>
                 <td>
-                  The same wall-clock date/time as a JS <code>Date</code>{' '}
-                  object. <code>date.getHours()</code> returns the same hour
-                  shown in <code>dateStr</code>.
+                  <InlineCode>date</InlineCode>
+                </td>
+                <td>
+                  <InlineCode>Date</InlineCode>
+                </td>
+                <td>
+                  The same wall-clock date/time as a JS{' '}
+                  <InlineCode>Date</InlineCode> object.{' '}
+                  <InlineCode>date.getHours()</InlineCode> returns the same hour
+                  shown in <InlineCode>dateStr</InlineCode>.
                   <br />
-                  <b>Note:</b> <code>JSON.stringify</code> calls{' '}
-                  <code>.toISOString()</code>, which outputs the internal UTC
-                  epoch (with the <code>Z</code> suffix). This may look
-                  different from <code>dateStr</code>, but they represent the
+                  <b>Note:</b> <InlineCode>JSON.stringify</InlineCode> calls{' '}
+                  <InlineCode>.toISOString()</InlineCode>, which outputs the
+                  internal UTC epoch (with the <InlineCode>Z</InlineCode>{' '}
+                  suffix). This may look different from{' '}
+                  <InlineCode>dateStr</InlineCode>, but they represent the
                   same wall-clock moment.
                 </td>
               </tr>
               <tr>
-                <td><code>utcDate</code></td>
-                <td><code>Date</code></td>
+                <td>
+                  <InlineCode>utcDate</InlineCode>
+                </td>
+                <td>
+                  <InlineCode>Date</InlineCode>
+                </td>
                 <td>
                   The actual UTC instant, computed as wall-clock time minus{' '}
-                  <code>numericTimeZone</code>. Only differs from{' '}
-                  <code>date</code> when <code>numericTimeZone</code> is
+                  <InlineCode>numericTimeZone</InlineCode>. Only differs from{' '}
+                  <InlineCode>date</InlineCode> when{' '}
+                  <InlineCode>numericTimeZone</InlineCode> is
                   explicitly set to a value different from the machine timezone.
                 </td>
               </tr>
@@ -331,19 +347,25 @@ genRecurDateBasedList({
           </table>
         </div>
         <p>
-          <b>Tip:</b> <code>dateStr</code> and <code>date</code> always agree.
-          <code> utcDate</code> only differs when <code>numericTimeZone</code>{' '}
-          is set to a value that differs from the machine timezone.
+          <b>Tip:</b> <InlineCode>dateStr</InlineCode> and{' '}
+          <InlineCode>date</InlineCode> always agree.{' '}
+          <InlineCode>utcDate</InlineCode> only differs when{' '}
+          <InlineCode>numericTimeZone</InlineCode> is set to a value that
+          differs from the machine timezone.
         </p>
 
         <p>
           Check out the result of the multi-rule example above. Since no{' '}
-          <code>numericTimeZone</code> is set, <code>date</code> and{' '}
-          <code>utcDate</code> are identical (both default to the machine
-          timezone). The <code>date</code> JSON value uses the <code>Z</code>{' '}
-          suffix because <code>JSON.stringify</code> calls{' '}
-          <code>.toISOString()</code>, but <code>dateStr</code> shows the
-          wall-clock time via <code>toLocaleString</code>. This was compiled in the time zone GMT+4.
+          <InlineCode>numericTimeZone</InlineCode> is set,{' '}
+          <InlineCode>date</InlineCode> and <InlineCode>utcDate</InlineCode> are
+          identical (both default to the machine timezone). The{' '}
+          <InlineCode>date</InlineCode> JSON value uses the{' '}
+          <InlineCode>Z</InlineCode> suffix because{' '}
+          <InlineCode>JSON.stringify</InlineCode> calls{' '}
+          <InlineCode>.toISOString()</InlineCode>, but{' '}
+          <InlineCode>dateStr</InlineCode> shows the wall-clock time via{' '}
+          <InlineCode>toLocaleString</InlineCode>. This was compiled in the time
+          zone GMT+4.
         </p>
 
         <Copyable>
@@ -370,10 +392,10 @@ genRecurDateBasedList({
         </Copyable>
 
         <p>
-          Check out another example with <code>direction</code> set to{' '}
-          <code>'backward'</code> and with applied custom{' '}
-          <code>numericTimeZone</code>. The example was compiled in the time
-          zone GMT+4.
+          Check out another example with <InlineCode>direction</InlineCode> set
+          to <InlineCode>'backward'</InlineCode> and with applied custom{' '}
+          <InlineCode>numericTimeZone</InlineCode>. The example was compiled in
+          the time zone GMT+4.
         </p>
 
         <Copyable>

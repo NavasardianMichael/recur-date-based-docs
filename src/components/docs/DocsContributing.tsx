@@ -1,4 +1,5 @@
 import { FC, memo } from 'react'
+import { InlineCode } from 'components/code-block/InlineCode'
 
 export const DocsContributing: FC = memo(() => (
   <section aria-labelledby='contributing'>
@@ -25,15 +26,15 @@ export const DocsContributing: FC = memo(() => (
       <li>Fork the Project</li>
       <li>
         Create your Feature Branch -{' '}
-        <code>git checkout -b feature/short-description</code>
+        <InlineCode>git checkout -b feature/short-description</InlineCode>
       </li>
       <li>
         Commit your Changes -{' '}
-        <code>git commit -m 'Provided some amazing feature'</code>
+        <InlineCode>git commit -m 'Provided some amazing feature'</InlineCode>
       </li>
       <li>
         Push to the Branch -{' '}
-        <code>git push origin feature/short-description</code>
+        <InlineCode>git push origin feature/short-description</InlineCode>
       </li>
       <li>Open a Pull Request</li>
     </ol>

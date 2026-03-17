@@ -50,16 +50,15 @@ genRecurDateBasedList({
       is a must, which is not the most lightweight one. So I didn't find any
       package that really suited my needs, when I ran into the problem of
       providing such functionality․
-      <p>
-        {' '}
-        Eventually I created this enhanced one, which is{' '}
-        <b>function-based</b>, <b>fully-typed</b>, very <b>lightweight</b>{' '}
-        and{' '}
-        <b>
-          doesn't require additional mapping for generation of extra
-          properties.
-        </b>
-      </p>
+    </p>
+    <p>
+      Eventually I created this enhanced one, which is <b>function-based</b>,{' '}
+      <b>fully-typed</b>, very <b>lightweight</b> and{' '}
+      <b>
+        doesn't require additional mapping for generation of extra properties.
+      </b>
+    </p>
+    <div>
       recur-date-based supports
       <ul>
         <li>both step-based and cron patterns for recurrence</li>
@@ -70,7 +69,7 @@ genRecurDateBasedList({
         <li>formatting</li>
         <li>error handling</li>
       </ul>
-    </p>
+    </div>
     <p>
       If you have some idea about the next features of the current package,
       please suggest changes by forking this repo and creating a pull
