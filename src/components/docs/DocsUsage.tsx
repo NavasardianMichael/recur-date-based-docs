@@ -1,4 +1,4 @@
-import { FC, memo } from 'react'
+﻿import { FC, memo } from 'react'
 import { Copyable } from 'components/copyable/main'
 import { CodeBlock } from 'components/code-block/CodeBlock'
 import { InlineCode } from 'components/code-block/InlineCode'
@@ -126,19 +126,19 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
         <Copyable>
           <CodeBlock language='json'>{`[
   {
-    "dateStr": "Mon, 1 Jan 2024 04:00:00",
-    "date": "2024-01-01T04:00:00.000Z",
+    "dateStr": "2024-01-01",
+    "date": "2024-01-01T00:00:00.000Z",
     "utcDate": "2024-01-01T00:00:00.000Z"
   },
   {
-    "dateStr": "Tue, 2 Jan 2024 04:00:00",
-    "date": "2024-01-02T04:00:00.000Z",
+    "dateStr": "2024-01-02",
+    "date": "2024-01-02T00:00:00.000Z",
     "utcDate": "2024-01-02T00:00:00.000Z"
   }
 ]`}</CodeBlock>
         </Copyable>
         <p>
-          <b>Cron: Every Monday, Wednesday and Friday at 9am:</b>
+          <b>Cron: Every Monday, Tuesday and Wednesday at 9am:</b>
         </p>
         <Copyable>
           <CodeBlock language='typescript'>{`genRecurDateBasedList({
@@ -146,6 +146,7 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
   end: '2024-01-11',
   rules: '0 9 * * 1-3',
   outputFormat: 'EEEE, D MMM YYYY HH:MM:SS',
+  numericTimeZone: 3,
 })`}</CodeBlock>
         </Copyable>
         <p>Result:</p>
@@ -153,23 +154,23 @@ formatDate(new Date('2024-01-15'), 'MMMM DD, YYYY', 'en-US') // "January 15, 202
           <CodeBlock language='json'>{`[
   {
     "dateStr": "Wednesday, 3 Jan 2024 09:00:00",
-    "date": "2024-01-03T09:00:00.000Z",
-    "utcDate": "2024-01-03T05:00:00.000Z"
+    "date": "2024-01-03T05:00:00.000Z",
+    "utcDate": "2024-01-03T06:00:00.000Z"
   },
   {
     "dateStr": "Monday, 8 Jan 2024 09:00:00",
-    "date": "2024-01-08T09:00:00.000Z",
-    "utcDate": "2024-01-08T05:00:00.000Z"
+    "date": "2024-01-08T05:00:00.000Z",
+    "utcDate": "2024-01-08T06:00:00.000Z"
   },
   {
     "dateStr": "Tuesday, 9 Jan 2024 09:00:00",
-    "date": "2024-01-09T09:00:00.000Z",
-    "utcDate": "2024-01-09T05:00:00.000Z"
+    "date": "2024-01-09T05:00:00.000Z",
+    "utcDate": "2024-01-09T06:00:00.000Z"
   },
   {
     "dateStr": "Wednesday, 10 Jan 2024 09:00:00",
-    "date": "2024-01-10T09:00:00.000Z",
-    "utcDate": "2024-01-10T05:00:00.000Z"
+    "date": "2024-01-10T05:00:00.000Z",
+    "utcDate": "2024-01-10T06:00:00.000Z"
   }
 ]`}</CodeBlock>
         </Copyable>
@@ -278,33 +279,90 @@ genRecurDateBasedList({
 })`}</CodeBlock>
         </Copyable>
 
+        <h3>Result Shape</h3>
         <p>
-          The result is an array consisting of objects, which include{' '}
-          <code>date</code> (wall-clock Date in target timezone â€” use normal
-          getters like <code>getHours()</code>, <code>getDay()</code>),{' '}
-          <code>utcDate</code> (the actual UTC moment â€” wall-clock minus{' '}
-          <code>numericTimeZone</code> offset), and <code>dateStr</code> (string
-          representation of <code>date</code>), plus the extended ones as well.
-          Check out the result.
+          Each result item contains three date representations, plus any keys
+          from <code>extend</code>:
+        </p>
+        <div className={`${styles.typesList} ${styles.fitContent}`}>
+          <table className={styles.paramsTable}>
+            <thead>
+              <tr>
+                <th>Field</th>
+                <th>Type</th>
+                <th>Description</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><code>dateStr</code></td>
+                <td><code>string</code></td>
+                <td>
+                  The wall-clock date/time as a formatted string. Controlled by{' '}
+                  <code>outputFormat</code> or <code>localeString</code>.
+                </td>
+              </tr>
+              <tr>
+                <td><code>date</code></td>
+                <td><code>Date</code></td>
+                <td>
+                  The same wall-clock date/time as a JS <code>Date</code>{' '}
+                  object. <code>date.getHours()</code> returns the same hour
+                  shown in <code>dateStr</code>.
+                  <br />
+                  <b>Note:</b> <code>JSON.stringify</code> calls{' '}
+                  <code>.toISOString()</code>, which outputs the internal UTC
+                  epoch (with the <code>Z</code> suffix). This may look
+                  different from <code>dateStr</code>, but they represent the
+                  same wall-clock moment.
+                </td>
+              </tr>
+              <tr>
+                <td><code>utcDate</code></td>
+                <td><code>Date</code></td>
+                <td>
+                  The actual UTC instant, computed as wall-clock time minus{' '}
+                  <code>numericTimeZone</code>. Only differs from{' '}
+                  <code>date</code> when <code>numericTimeZone</code> is
+                  explicitly set to a value different from the machine timezone.
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          <b>Tip:</b> <code>dateStr</code> and <code>date</code> always agree.
+          <code> utcDate</code> only differs when <code>numericTimeZone</code>{' '}
+          is set to a value that differs from the machine timezone.
+        </p>
+
+        <p>
+          Check out the result of the multi-rule example above. Since no{' '}
+          <code>numericTimeZone</code> is set, <code>date</code> and{' '}
+          <code>utcDate</code> are identical (both default to the machine
+          timezone). The <code>date</code> JSON value uses the <code>Z</code>{' '}
+          suffix because <code>JSON.stringify</code> calls{' '}
+          <code>.toISOString()</code>, but <code>dateStr</code> shows the
+          wall-clock time via <code>toLocaleString</code>. This was compiled in the time zone GMT+4.
         </p>
 
         <Copyable>
           <CodeBlock language='json'>{`[
     {
         "dateStr": "1/1/2024, 00:00:00",
-        "date": "2024-01-01T00:00:00.000Z",
+        "date": "2023-12-31T20:00:00.000Z",
         "utcDate": "2023-12-31T20:00:00.000Z",
         "isMonday": true
     },
     {
         "dateStr": "2/4/2024, 04:00:00",
-        "date": "2024-02-04T04:00:00.000Z",
+        "date": "2024-02-04T00:00:00.000Z",
         "utcDate": "2024-02-04T00:00:00.000Z",
         "isMonday": false
     },
     {
         "dateStr": "3/7/2024, 08:00:00",
-        "date": "2024-03-07T08:00:00.000Z",
+        "date": "2024-03-07T04:00:00.000Z",
         "utcDate": "2024-03-07T04:00:00.000Z",
         "isMonday": false
     }
@@ -322,7 +380,7 @@ genRecurDateBasedList({
           <CodeBlock language='typescript'>{`import { genRecurDateBasedList, DIRECTIONS, INTERVAL_UNITS } from 'recur-date-based'
 
 genRecurDateBasedList({
-  start: new Date(),
+  start: '2024-04-08T18:45:23',
   end: 3,
   rules: [{ unit: INTERVAL_UNITS.day, portion: 2 }],
   direction: DIRECTIONS.backward,
@@ -338,19 +396,19 @@ genRecurDateBasedList({
         <Copyable>
           <CodeBlock language='json'>{`[
     {
-        "dateStr": "2024-04-04T18:45:23",
-        "date": "2024-04-04T18:45:23.977Z",
-        "utcDate": "2024-04-04T15:45:23.977Z"
+        "dateStr": "2024-04-08T18:45:23",
+        "date": "2024-04-08T14:45:23.000Z",
+        "utcDate": "2024-04-08T15:45:23.000Z"
     },
     {
         "dateStr": "2024-04-06T18:45:23",
-        "date": "2024-04-06T18:45:23.977Z",
-        "utcDate": "2024-04-06T15:45:23.977Z"
+        "date": "2024-04-06T14:45:23.000Z",
+        "utcDate": "2024-04-06T15:45:23.000Z"
     },
     {
-        "dateStr": "2024-04-08T18:45:23",
-        "date": "2024-04-08T18:45:23.977Z",
-        "utcDate": "2024-04-08T15:45:23.977Z"
+        "dateStr": "2024-04-04T18:45:23",
+        "date": "2024-04-04T14:45:23.000Z",
+        "utcDate": "2024-04-04T15:45:23.000Z"
     }
 ]`}</CodeBlock>
         </Copyable>
