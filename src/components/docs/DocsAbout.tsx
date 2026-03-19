@@ -7,7 +7,14 @@ export const DocsAbout: FC = memo(() => (
   <section aria-labelledby='about-the-project'>
     <h2 id='about-the-project'>About The Project</h2>
     <p>
-      <b>At a glance</b>: <InlineCode>recur-date-based</InlineCode>{' '}
+      <b>At a glance</b>:{' '}
+      <a
+        target='_blank'
+        rel='noreferrer'
+        href='https://www.npmjs.com/package/recur-date-based'
+      >
+        <InlineCode>recur-date-based</InlineCode>
+      </a>{' '}
       generates recurring dates (step-based or cron) and lets you attach
       strongly-typed extra properties to each occurrence.
     </p>
@@ -68,7 +75,14 @@ genRecurDateBasedList({
       </b>
     </p>
     <div>
-      recur-date-based supports
+      <a
+        target='_blank'
+        rel='noreferrer'
+        href='https://www.npmjs.com/package/recur-date-based'
+      >
+        recur-date-based
+      </a>{' '}
+      supports
       <ul>
         <li>both step-based and cron patterns for recurrence</li>
         <li>filtering and extending the output</li>
